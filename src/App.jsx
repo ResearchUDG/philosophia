@@ -18,7 +18,14 @@ const AnalyticClass23Sep = lazy(() => import('./pages/AnalyticClass23Sep'))
 const AnalyticClass28Sep = lazy(() => import('./pages/AnalyticClass28Sep'))
 const AnalyticClass30Sep = lazy(() => import('./pages/AnalyticClass30Sep'))
 const AnalyticClass07Oct = lazy(() => import('./pages/AnalyticClass07Oct'))
+const AnalyticClass14Oct = lazy(() => import('./pages/AnalyticClass14Oct'))
+const AnalyticClass19Oct = lazy(() => import('./pages/AnalyticClass19Oct'))
+const AnalyticClass21Oct = lazy(() => import('./pages/AnalyticClass21Oct'))
+const AnalyticClass26Oct = lazy(() => import('./pages/AnalyticClass26Oct'))
+const AnalyticClass28Oct = lazy(() => import('./pages/AnalyticClass28Oct'))
 const Home = lazy(() => import('./pages/Home'))
+const PhilosophiaLibrary = lazy(() => import('./pages/PhilosophiaLibrary'))
+const LibraryCartography = lazy(() => import('./pages/LibraryCartography'))
 const CafeFilosofico = lazy(() => import('./pages/CafeFilosofico'))
 const CafeCapitalismoEvent = lazy(() => import('./pages/CafeCapitalismoEvent'))
 const CafeMeritocraciaEvent = lazy(() => import('./pages/CafeMeritocraciaEvent'))
@@ -26,6 +33,8 @@ const CafeMercadotecniaEvent = lazy(() => import('./pages/CafeMercadotecniaEvent
 const CafeMercadotecniaDefinitions = lazy(() => import('./pages/CafeMercadotecniaDefinitions'))
 const CafeMercadotecniaSystem2D = lazy(() => import('./pages/CafeMercadotecniaSystem2D'))
 const CafeAguaEvent = lazy(() => import('./pages/CafeAguaEvent'))
+const CafeAguaSystem2D = lazy(() => import('./pages/CafeAguaSystem2D'))
+const CafeRedesSocialesEvent = lazy(() => import('./pages/CafeRedesSocialesEvent'))
 const AcademicTalkAI22Sep = lazy(() => import('./pages/AcademicTalkAI22Sep'))
 const FourthSemester = lazy(() => import('./pages/FourthSemester'))
 const OntologiaI = lazy(() => import('./pages/OntologiaI'))
@@ -80,6 +89,8 @@ const OntologiaClass23Sep = lazy(() => import('./pages/OntologiaClass23Sep'))
 const OntologiaClass30Sep = lazy(() => import('./pages/OntologiaClass30Sep'))
 const OntologiaClass07Oct = lazy(() => import('./pages/OntologiaClass07Oct'))
 const OntologiaClass14Oct = lazy(() => import('./pages/OntologiaClass14Oct'))
+const OntologiaClass19Oct = lazy(() => import('./pages/OntologiaClass19Oct'))
+const OntologiaClass26Oct = lazy(() => import('./pages/OntologiaClass26Oct'))
 const KantPrefacesMap = lazy(() => import('./pages/KantPrefacesMap'))
 const KantIntroductionMap = lazy(() => import('./pages/KantIntroductionMap'))
 const KantAestheticMap = lazy(() => import('./pages/KantAestheticMap'))
@@ -90,7 +101,9 @@ const HartmannChapterOneSystem = lazy(() => import('./pages/HartmannChapterOneSy
 const HegelPhenomenologyPrefaceStudy = lazy(() => import('./pages/HegelPhenomenologyPrefaceStudy'))
 const HegelLogicBeingNothingBecomingStudy = lazy(() => import('./pages/HegelLogicBeingNothingBecomingStudy'))
 const HegelCroceTaskSystem = lazy(() => import('./pages/HegelCroceTaskSystem'))
+const KolakowskiPositivismTask = lazy(() => import('./pages/KolakowskiPositivismTask'))
 const MarxCritiqueHegelStudy = lazy(() => import('./pages/MarxCritiqueHegelStudy'))
+const MarxHegelThreeReadingsSystem = lazy(() => import('./pages/MarxHegelThreeReadingsSystem'))
 const MethodsResearch = lazy(() => import('./pages/MethodsResearch'))
 const MethodsClass17Aug = lazy(() => import('./pages/MethodsClass17Aug'))
 const MethodsClass19Aug = lazy(() => import('./pages/MethodsClass19Aug'))
@@ -102,6 +115,11 @@ const MethodsClass14Sep = lazy(() => import('./pages/MethodsClass14Sep'))
 const MethodsClass21Sep = lazy(() => import('./pages/MethodsClass21Sep'))
 const MethodsClass23Sep = lazy(() => import('./pages/MethodsClass23Sep'))
 const MethodsClass14Oct = lazy(() => import('./pages/MethodsClass14Oct'))
+const MethodsClass19Oct = lazy(() => import('./pages/MethodsClass19Oct'))
+const MethodsClass21Oct = lazy(() => import('./pages/MethodsClass21Oct'))
+const MethodsClass26Oct = lazy(() => import('./pages/MethodsClass26Oct'))
+const MethodsPhenomenologyExposition = lazy(() => import('./pages/MethodsPhenomenologyExposition'))
+const MethodsPhenomenologySystem2D = lazy(() => import('./pages/MethodsPhenomenologySystem2D'))
 const MethodsRussSystem2D = lazy(() => import('./pages/MethodsRussSystem2D'))
 const AnalyticPhilosophy = lazy(() => import('./pages/AnalyticPhilosophy'))
 const AnalyticClass17Aug = lazy(() => import('./pages/AnalyticClass17Aug'))
@@ -112,10 +130,16 @@ const AnalyticClass31Aug = lazy(() => import('./pages/AnalyticClass31Aug'))
 const AnalyticClass02Sep = lazy(() => import('./pages/AnalyticClass02Sep'))
 const AnalyticFollesdalMap = lazy(() => import('./pages/AnalyticFollesdalMap'))
 const AnalyticHackerSystem = lazy(() => import('./pages/AnalyticHackerSystem'))
-const CriticalTheory = lazy(() => import('./pages/CriticalTheory'))
+const AnalyticGlockSystem = lazy(() => import('./pages/AnalyticGlockSystem'))
+const NavaTechnoscienceSystem = lazy(() => import('./pages/NavaTechnoscienceSystem'))
+const CriticalTheory = lazy(() => import('./pages/DialecticalArchive'))
+const FreudMalestarCapituloI = lazy(() => import('./pages/FreudMalestarCapituloI'))
+const DialecticalSessionFrame = lazy(() => import('./pages/DialecticalArchive').then((m) => ({ default: m.DialecticalSessionFrame })))
+const DialecticalRestoredClass = lazy(() => import('./pages/DialecticalArchive').then((m) => ({ default: m.DialecticalRestoredClass })))
 const CriticalTheoryTask1 = lazy(() => import('./pages/CriticalTheoryTask1'))
 const MarxCommodityValueSystem = lazy(() => import('./pages/MarxCommodityValueSystem'))
 const LukacsReificationSystem = lazy(() => import('./pages/LukacsReificationSystem'))
+const LukacsOntologySystem = lazy(() => import('./pages/LukacsOntologySystem'))
 const CriticalTheoryClass18Aug = lazy(() => import('./pages/CriticalTheoryClass18Aug'))
 const CriticalTheoryClass20Aug = lazy(() => import('./pages/CriticalTheoryClass20Aug'))
 const CriticalTheoryClass25Aug = lazy(() => import('./pages/CriticalTheoryClass25Aug'))
@@ -123,6 +147,13 @@ const CriticalTheoryClass27Aug = lazy(() => import('./pages/CriticalTheoryClass2
 const CriticalTheoryClass01Sep = lazy(() => import('./pages/CriticalTheoryClass01Sep'))
 const CriticalTheoryClass03Sep = lazy(() => import('./pages/CriticalTheoryClass03Sep'))
 const CriticalTheoryClass10Sep = lazy(() => import('./pages/CriticalTheoryClass10Sep'))
+const CriticalTheoryClass17Sep = lazy(() => import('./pages/CriticalTheoryClass17Sep'))
+const CriticalTheoryClass22Sep = lazy(() => import('./pages/CriticalTheoryClass22Sep'))
+const CriticalTheoryClass24Sep = lazy(() => import('./pages/CriticalTheoryClass24Sep'))
+const CriticalTheoryClass15Oct = lazy(() => import('./pages/CriticalTheoryClass15Oct'))
+const CriticalTheoryClass20Oct = lazy(() => import('./pages/CriticalTheoryClass20Oct'))
+const CriticalTheoryClass22Oct = lazy(() => import('./pages/CriticalTheoryClass22Oct'))
+const CriticalTheoryClass29Oct = lazy(() => import('./pages/CriticalTheoryClass29Oct'))
 const EthicsClassics = lazy(() => import('./pages/EthicsClassics'))
 const EthicsClass18Aug = lazy(() => import('./pages/EthicsClass18Aug'))
 const EthicsClass20Aug = lazy(() => import('./pages/EthicsClass20Aug'))
@@ -132,6 +163,11 @@ const EthicsClass01Sep = lazy(() => import('./pages/EthicsClass01Sep'))
 const EthicsClass03Sep = lazy(() => import('./pages/EthicsClass03Sep'))
 const EthicsClass10Sep = lazy(() => import('./pages/EthicsClass10Sep'))
 const EthicsClass08Oct = lazy(() => import('./pages/EthicsClass08Oct'))
+const EthicsClass13Oct = lazy(() => import('./pages/EthicsClass13Oct'))
+const EthicsClass15Oct = lazy(() => import('./pages/EthicsClass15Oct'))
+const EthicsClass20Oct = lazy(() => import('./pages/EthicsClass20Oct'))
+const EthicsClass27Oct = lazy(() => import('./pages/EthicsClass27Oct'))
+const EthicsClass29Oct = lazy(() => import('./pages/EthicsClass29Oct'))
 const TasksBoard = lazy(() => import('./pages/TasksBoard'))
 const SpinozaEthicsStudy = lazy(() => import('./pages/SpinozaEthicsStudy'))
 const LeibnizStudy = lazy(() => import('./pages/LeibnizStudy'))
@@ -150,11 +186,16 @@ function App() {
   const isPublicCafeRoute =
     typeof window !== 'undefined' &&
     window.location.hash.startsWith('#/cafe-filosofico')
+  const isPublicPhenomenologyRoute =
+    typeof window !== 'undefined' &&
+    window.location.hash.startsWith('#/estudio/fenomenologia-metodo/sistema-2d')
+  const hideAcademicNotifications =
+    isPublicCafeRoute || isPublicPhenomenologyRoute
 
   return (
     <HashRouter>
       <ScrollToTop />
-      {!isPublicCafeRoute && (<AcademicNotifications  />)}
+      {!hideAcademicNotifications && (<AcademicNotifications />)}
       <Suspense
         fallback={
           <div className="route-loading" role="status" aria-live="polite">
@@ -165,6 +206,8 @@ function App() {
       >
         <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/biblioteca" element={<PhilosophiaLibrary />} />
+        <Route path="/biblioteca/cartografia" element={<LibraryCartography />} />
         <Route path="/cafe-filosofico" element={<CafeFilosofico />} />
         <Route
           path="/cafe-filosofico/2026/09/07/fin-del-mundo-fin-del-capitalismo"
@@ -189,6 +232,14 @@ function App() {
         <Route
           path="/cafe-filosofico/2026/10/19/agua"
           element={<CafeAguaEvent />}
+        />
+        <Route
+          path="/cafe-filosofico/2026/10/19/agua/sistema-2d"
+          element={<CafeAguaSystem2D />}
+        />
+        <Route
+          path="/cafe-filosofico/2026/11/03/redes-sociales"
+          element={<CafeRedesSocialesEvent />}
         />
         <Route
           path="/eventos/2026/09/22/filosofia-en-la-era-de-la-ia"
@@ -362,6 +413,14 @@ function App() {
           element={<OntologiaClass14Oct />}
         />
         <Route
+          path="/semestre/5/ontologia-ii/clase/19-octubre"
+          element={<OntologiaClass19Oct />}
+        />
+        <Route
+          path="/semestre/5/ontologia-ii/clase/26-octubre"
+          element={<OntologiaClass26Oct />}
+        />
+        <Route
           path="/tareas/ontologia-ii/kant-dialectica-trascendental"
           element={<KantDialecticSystem />}
         />
@@ -386,8 +445,16 @@ function App() {
           element={<HegelCroceTaskSystem />}
         />
         <Route
+          path="/tareas/ontologia-ii/kolakowski-positivismo"
+          element={<KolakowskiPositivismTask />}
+        />
+        <Route
           path="/estudios/ontologia-ii/marx-critica-dialectica-hegeliana"
           element={<MarxCritiqueHegelStudy />}
+        />
+        <Route
+          path="/tareas/ontologia-ii/marx-hegel-bloch-feuerbach/sistema"
+          element={<MarxHegelThreeReadingsSystem />}
         />
         <Route
           path="/tareas/ontologia-ii/kant-critica-razon-pura-prologos"
@@ -440,6 +507,30 @@ function App() {
         <Route
           path="/semestre/5/metodos-de-investigacion/clase/14-octubre"
           element={<MethodsClass14Oct />}
+        />
+        <Route
+          path="/semestre/5/metodos-de-investigacion/clase/19-octubre"
+          element={<MethodsClass19Oct />}
+        />
+        <Route
+          path="/semestre/5/metodos-de-investigacion/clase/21-octubre"
+          element={<MethodsClass21Oct />}
+        />
+        <Route
+          path="/semestre/5/metodos-de-investigacion/clase/26-octubre"
+          element={<MethodsClass26Oct />}
+        />
+        <Route
+          path="/semestre/5/metodos-de-investigacion/clase/28-octubre"
+          element={<MethodsPhenomenologySystem2D />}
+        />
+        <Route
+          path="/estudio/fenomenologia-metodo"
+          element={<MethodsPhenomenologyExposition />}
+        />
+        <Route
+          path="/estudio/fenomenologia-metodo/sistema-2d"
+          element={<MethodsPhenomenologySystem2D />}
         />
         <Route
           path="/tareas/metodos-de-investigacion/jacqueline-russ-capitulos-1-3"
@@ -501,6 +592,26 @@ function App() {
           path="/semestre/5/filosofia-analitica/clase/7-octubre"
           element={<AnalyticClass07Oct />}
         />
+        <Route
+          path="/semestre/5/filosofia-analitica/clase/14-octubre"
+          element={<AnalyticClass14Oct />}
+        />
+        <Route
+          path="/semestre/5/filosofia-analitica/clase/19-octubre"
+          element={<AnalyticClass19Oct />}
+        />
+        <Route
+          path="/semestre/5/filosofia-analitica/clase/21-octubre"
+          element={<AnalyticClass21Oct />}
+        />
+        <Route
+          path="/semestre/5/filosofia-analitica/clase/26-octubre"
+          element={<AnalyticClass26Oct />}
+        />
+        <Route
+          path="/semestre/5/filosofia-analitica/clase/28-octubre"
+          element={<AnalyticClass28Oct />}
+        />
 
         <Route
           path="/semestre/5/filosofia-analitica/reporte/follesdal"
@@ -509,9 +620,21 @@ function App() {
         <Route
           path="/semestre/5/filosofia-analitica/reporte/hacker"
           element={<AnalyticHackerSystem />}
+        />
+        <Route
+          path="/semestre/5/filosofia-analitica/lectura/glock-capitulo-2"
+          element={<AnalyticGlockSystem />}
+        />
+        <Route
+          path="/semestre/5/filosofia-analitica/lectura/nava-tecnociencia"
+          element={<NavaTechnoscienceSystem />}
         /><Route
           path="/semestre/5/teoria-critica"
           element={<CriticalTheory />}
+        />
+        <Route
+          path="/semestre/5/teoria-critica/lectura/freud-malestar-capitulo-1"
+          element={<FreudMalestarCapituloI />}
         />
         <Route
           path="/tareas/teoria-critica/tarea-1"
@@ -526,32 +649,64 @@ function App() {
           element={<LukacsReificationSystem />}
         />
         <Route
+          path="/estudios/teoria-critica/lukacs-ontologia-ser-social"
+          element={<LukacsOntologySystem />}
+        />
+        <Route
           path="/semestre/5/teoria-critica/clase/18-agosto"
-          element={<CriticalTheoryClass18Aug />}
+          element={<DialecticalSessionFrame id="18-agosto"><CriticalTheoryClass18Aug /></DialecticalSessionFrame>}
         />
         <Route
           path="/semestre/5/teoria-critica/clase/20-agosto"
-          element={<CriticalTheoryClass20Aug />}
+          element={<DialecticalSessionFrame id="20-agosto"><CriticalTheoryClass20Aug /></DialecticalSessionFrame>}
         />
         <Route
           path="/semestre/5/teoria-critica/clase/25-agosto"
-          element={<CriticalTheoryClass25Aug />}
+          element={<DialecticalSessionFrame id="25-agosto"><CriticalTheoryClass25Aug /></DialecticalSessionFrame>}
         />
         <Route
           path="/semestre/5/teoria-critica/clase/27-agosto"
-          element={<CriticalTheoryClass27Aug />}
+          element={<DialecticalSessionFrame id="27-agosto"><CriticalTheoryClass27Aug /></DialecticalSessionFrame>}
         />
         <Route
           path="/semestre/5/teoria-critica/clase/1-septiembre"
-          element={<CriticalTheoryClass01Sep />}
+          element={<DialecticalSessionFrame id="1-septiembre"><CriticalTheoryClass01Sep /></DialecticalSessionFrame>}
         />
         <Route
           path="/semestre/5/teoria-critica/clase/3-septiembre"
-          element={<CriticalTheoryClass03Sep />}
+          element={<DialecticalSessionFrame id="3-septiembre"><CriticalTheoryClass03Sep /></DialecticalSessionFrame>}
         />
         <Route
           path="/semestre/5/teoria-critica/clase/10-septiembre"
-          element={<CriticalTheoryClass10Sep />}
+          element={<DialecticalSessionFrame id="10-septiembre"><CriticalTheoryClass10Sep /></DialecticalSessionFrame>}
+        />
+        <Route
+          path="/semestre/5/teoria-critica/clase/17-septiembre"
+          element={<DialecticalSessionFrame id="17-septiembre"><CriticalTheoryClass17Sep /></DialecticalSessionFrame>}
+        />
+        <Route
+          path="/semestre/5/teoria-critica/clase/22-septiembre"
+          element={<DialecticalSessionFrame id="22-septiembre"><CriticalTheoryClass22Sep /></DialecticalSessionFrame>}
+        />
+        <Route
+          path="/semestre/5/teoria-critica/clase/24-septiembre"
+          element={<DialecticalSessionFrame id="24-septiembre"><CriticalTheoryClass24Sep /></DialecticalSessionFrame>}
+        />
+        <Route
+          path="/semestre/5/teoria-critica/clase/15-octubre"
+          element={<DialecticalSessionFrame id="15-octubre"><CriticalTheoryClass15Oct /></DialecticalSessionFrame>}
+        />
+        <Route
+          path="/semestre/5/teoria-critica/clase/20-octubre"
+          element={<DialecticalSessionFrame id="20-octubre"><CriticalTheoryClass20Oct /></DialecticalSessionFrame>}
+        />
+        <Route
+          path="/semestre/5/teoria-critica/clase/22-octubre"
+          element={<DialecticalSessionFrame id="22-octubre"><CriticalTheoryClass22Oct /></DialecticalSessionFrame>}
+        />
+        <Route
+          path="/semestre/5/teoria-critica/clase/29-octubre"
+          element={<DialecticalSessionFrame id="29-octubre"><CriticalTheoryClass29Oct /></DialecticalSessionFrame>}
         />
         <Route
           path="/semestre/5/etica"
@@ -589,6 +744,20 @@ function App() {
           path="/semestre/5/etica/clase/8-octubre"
           element={<EthicsClass08Oct />}
         />
+        <Route
+          path="/semestre/5/etica/clase/13-octubre"
+          element={<EthicsClass13Oct />}
+        />
+        <Route
+          path="/semestre/5/etica/clase/15-octubre"
+          element={<EthicsClass15Oct />}
+        />
+        <Route
+          path="/semestre/5/etica/clase/20-octubre"
+          element={<EthicsClass20Oct />}
+        />
+        <Route path="/semestre/5/etica/clase/27-octubre" element={<EthicsClass27Oct />} />
+        <Route path="/semestre/5/etica/clase/29-octubre" element={<EthicsClass29Oct />} />
         <Route
           path="/tareas/ontologia-ii/spinoza-etica-parte-i"
           element={<SpinozaEthicsStudy />}

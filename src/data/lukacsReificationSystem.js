@@ -1,3 +1,6 @@
+import { lukacsSourcePassages } from './lukacsReificationSourcePassages.js'
+import { layoutLukacsNodes } from './lukacsReificationLayout.js'
+
 const isArrow = (item) => ['→', '⇢', '↔', '≠', '+'].includes(item)
 
 const makeSchema = (id, title, diagram, critical = false) => {
@@ -65,7 +68,11 @@ const N = ({
     page,
     phase,
     branch,
-    excerpt,
+    excerpt, // síntesis editorial, NO cita literal
+    sourcePassage: lukacsSourcePassages[id]?.text || '',
+    sourcePdfPage: lukacsSourcePassages[id]?.pdfPage,
+    sourcePrintedPage: lukacsSourcePassages[id]?.printedPage,
+    sourceAttribution: lukacsSourcePassages[id]?.attribution || 'Lukács',
     explanation,
     role,
     question,
@@ -79,7 +86,7 @@ const N = ({
   },
 })
 
-export const lukacsReificationNodes = [
+const lukacsUnpackedNodes = [
   N({
     id:'L01', code:'§1.01', title:'La mercancía como problema estructural', page:'apertura',
     phase:'Mercancía', branch:['genesis','totality'],
@@ -724,6 +731,9 @@ export const lukacsReificationNodes = [
   }),
 ]
 
+// Inspector, rutas, guía y cámara usan exactamente las mismas coordenadas.
+export const lukacsReificationNodes = layoutLukacsNodes(lukacsUnpackedNodes)
+
 const nodeMap = new Map(lukacsReificationNodes.map((node) => [node.id, node]))
 
 lukacsReificationNodes.forEach((node) => {
@@ -927,7 +937,7 @@ export const lukacsReificationGuidedRoute = lukacsReificationNodes
 export const lukacsReificationSource = {
   author:'Georg Lukács',
   title:'Historia y conciencia de clase · La cosificación y la conciencia de clase del proletariado',
-  assignedPages:'PDF proporcionado · 27 páginas · impreso 110–136 aprox.',
+  assignedPages:'PDF proporcionado · 27 páginas · apertura sin folio y páginas impresas 111–136.',
   boundary:'El sistema reconstruye I. El fenómeno de la cosificación. La última página conserva únicamente el umbral de II. Las antinomias del pensamiento burgués; no se completa con material externo.',
-  edition:'Fuente única: 5- LUKACS HISTORIA Y CONCIENCIA DE CLASE(1).pdf + transcripción y dossier del vault PHILOSOPHIA.',
+  edition:'Lectura cotejada con LUCÁCS G. HISTORIA Y CONCIENCIA DE CLASE 2.pdf (27 páginas) y las notas de lectura del vault PHILOSOPHIA. Los pasajes extensos proceden de transcripción documental con posibles erratas de digitalización.',
 }

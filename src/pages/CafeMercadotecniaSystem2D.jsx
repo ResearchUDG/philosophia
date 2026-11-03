@@ -1,3 +1,5 @@
+import SectionPedagogy from '../components/philosophy/system2d/SectionPedagogy'
+import { initialSystem2DRoute, useSystem2DCompactViewport } from '../components/philosophy/system2d/mobilePerformance.js'
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { Link } from 'react-router'
 import {
@@ -26,7 +28,8 @@ import {
 const nodeTypes = { text: CafeMercadotecniaNode, core: CafeMercadotecniaNode }
 
 function SystemCanvas({ embedded = false }) {
-  const [route, setRoute] = useState('all')
+  const [route, setRoute] = useState(() => initialSystem2DRoute(marketingDialogueRoutes))
+  const compactViewport = useSystem2DCompactViewport()
   const [selectedId, setSelectedId] = useState(null)
   const [folioId, setFolioId] = useState(null)
   const [guidedMode, setGuidedMode] = useState(false)
@@ -391,16 +394,17 @@ function SystemCanvas({ embedded = false }) {
             <button type="button" onClick={toggleFullscreen}>{workspaceFullscreen ? 'Salir de pantalla completa' : 'Pantalla completa'}</button>
           </div>
           <ReactFlow
-            nodes={nodes}
-            edges={edges}
+            nodes={compactViewport ? nodes.filter((node) => !node.hidden) : nodes}
+            edges={compactViewport ? edges.filter((edge) => !edge.hidden) : edges}
             nodeTypes={nodeTypes}
+              onlyRenderVisibleElements={compactViewport && route === 'all'}
             onNodeClick={(_, node) => selectById(node.id)}
             fitView
             minZoom={.18}
             maxZoom={1.65}
           >
             <Background gap={26} size={1} color="rgba(55,45,36,.14)" />
-            <MiniMap pannable zoomable nodeColor={(node) => node.data.critical ? '#8b3d34' : '#9c7434'} />
+            {!compactViewport && <MiniMap pannable zoomable nodeColor={(node) => node.data.critical ? '#8b3d34' : '#9c7434'} />} 
             <Controls />
           </ReactFlow>
 
@@ -416,6 +420,18 @@ function SystemCanvas({ embedded = false }) {
         </div>
 
         <aside className="cafe2d-inspector">
+          <SectionPedagogy
+            nodes={marketingDialogueNodes}
+            routes={marketingDialogueRoutes}
+            activeRoute={route}
+            selectedId={selectedId}
+            onSectionChange={(id) => { setGuidedMode(false); setRoute(id); setSelectedId(null) }}
+            onFocusNode={(id) => {
+              setGuidedMode(false)
+              selectNode(marketingDialogueNodeById(id))
+            }}
+          />
+
           {selected ? (
             <div className="cafe2d-inspector-scroll">
               <div className="cafe2d-inspector-head"><span>{selected.data.phase}</span><b>{selected.data.code}</b></div>

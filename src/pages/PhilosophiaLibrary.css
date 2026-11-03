@@ -1,0 +1,147 @@
+.library-shell{--i:#19221b;--p:#ede3ce;--cream:#f8f0df;--g:#bc9238;--r:#a25738;--green:#617556;background:radial-gradient(circle at 1px 1px,#262c230e 1px,transparent 1.1px) 0 0/20px 20px,var(--p);color:var(--i);font-family:Georgia,'Times New Roman',serif;min-height:100dvh;}
+.library-shell *{box-sizing:border-box;}
+.library-nav{display:grid;grid-template-columns:1fr auto 1fr;gap:16px;align-items:center;border-bottom:1px solid var(--i);padding:19px 4vw;font:800 10px Arial,sans-serif;letter-spacing:.11em;}
+.library-nav>span{text-align:right}.library-logo{font:16px Georgia,serif;}
+.library-hero{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(260px,.65fr);gap:50px;padding:clamp(44px,6vw,88px) 5vw;border-bottom:3px solid var(--i);background:linear-gradient(140deg,var(--cream),var(--p));}
+.library-eyebrow,.library-overline,.library-hero-aside>span,.library-index-head span,.library-controls label>span,.library-book-top,.library-book-author,.library-book a,.library-stats span,.library-result-count,.library-author>span,.library-author p,.library-footer{font:800 10px/1.5 Arial,sans-serif;letter-spacing:.09em;}
+.library-eyebrow,.library-index-head span{color:var(--r)}.library-overline{margin:38px 0 10px;}
+.library-hero h1{margin:10px 0 30px;font-size:clamp(57px,7.4vw,112px);line-height:.87;letter-spacing:-.065em;}
+.library-hero h1 em{display:block;color:var(--green);padding-top:12px;font-weight:normal;}
+.library-hero-copy>p:last-child{font-size:clamp(16px,1.6vw,21px);line-height:1.5;max-width:670px;margin:0;}
+.library-hero-aside{align-self:end;padding:32px;background:var(--i);color:var(--p);border-top:8px solid var(--g);}
+.library-hero-aside>span{color:#eac576}.library-hero-aside strong{display:block;font-size:clamp(26px,3vw,42px);line-height:1.08;margin:30px 0 20px;}
+.library-hero-aside p{line-height:1.5;font-size:16px;margin:0;}
+.library-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-bottom:1px solid var(--i);}
+.library-stats>div{padding:22px 4vw;border-right:1px solid #19221b40;display:flex;gap:18px;align-items:baseline;}
+.library-stats>div:last-child{border-right:0}.library-stats b{font:normal clamp(35px,5vw,67px) Georgia,serif;}.library-stats span{color:#5b5b4f;}
+.library-index{padding:clamp(35px,5vw,75px) 5vw;}
+.library-index-head{display:flex;align-items:end;justify-content:space-between;gap:30px;}
+.library-index-head h2{font-size:clamp(36px,5vw,66px);letter-spacing:-.04em;line-height:1;margin:10px 0 0;}
+.library-index-head p{max-width:360px;font-size:16px;line-height:1.45;margin:0;}
+.library-tabs{display:flex;border:2px solid var(--i);margin:34px 0 14px;overflow-x:auto;}
+.library-tabs button{border:0;border-right:1px solid var(--i);padding:17px 22px;background:transparent;color:var(--i);font:800 12px Arial,sans-serif;cursor:pointer;}
+.library-tabs button[aria-pressed=true]{color:var(--p);background:var(--i);}
+.library-tabs button span{opacity:.65;margin-left:8px;}
+.library-controls{display:grid;grid-template-columns:minmax(180px,1.8fr) minmax(140px,1fr) minmax(130px,.8fr);gap:12px;}
+.library-controls label{min-width:0;display:flex;flex-direction:column;gap:8px;}
+.library-controls input,.library-controls select{min-height:52px;width:100%;background:var(--cream);border:1px solid var(--i);padding:12px 15px;color:var(--i);font:15px Arial,sans-serif;border-radius:0;}
+.library-shell a:focus-visible,.library-shell button:focus-visible,.library-shell input:focus-visible,.library-shell select:focus-visible{outline:3px solid var(--r);outline-offset:3px;}
+.library-result-count{display:flex;justify-content:space-between;gap:12px;border-top:2px solid var(--i);padding:17px 0 20px;margin-top:23px;}
+.library-books{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px;}
+.library-book{--accent:#66715a;position:relative;display:flex;flex-direction:column;min-height:300px;padding:20px 21px;background:var(--cream);border:1px solid var(--i);overflow:hidden;min-width:0;}
+.library-book:before{content:'';position:absolute;left:0;right:0;top:0;height:6px;background:var(--accent);}
+.library-book--crítica{--accent:#b08427}.library-book--ontología{--accent:#576a4c}.library-book--analítica{--accent:#397b5a}.library-book--epistemología{--accent:#436e7b}.library-book--ética{--accent:#a1503a}.library-book--política{--accent:#534a83}.library-book--investigación{--accent:#76614e}
+.library-book-top{display:flex;justify-content:space-between;gap:10px;color:var(--accent);position:relative;z-index:1;}
+.library-book-top span:last-child{text-align:right;}
+.library-book-mark{position:absolute;font:italic 125px Georgia,serif;color:var(--accent);opacity:.08;right:12px;top:26px;pointer-events:none;}
+.library-book-author{margin:62px 0 9px;color:var(--accent);text-transform:uppercase;position:relative;}
+.library-book h3{font-size:clamp(23px,2.1vw,35px);line-height:1.09;letter-spacing:-.025em;margin:0 0 25px;flex:1;overflow-wrap:anywhere;position:relative;}
+.library-book-labels{display:flex;flex-wrap:wrap;gap:7px;}.library-book-labels span{display:inline-block;border:1px solid #19221b55;padding:6px 9px;font:800 10px Arial,sans-serif;}
+.library-book-labels .recommended{background:#ead69e;color:#47330d;border-color:#b08427;}
+.library-book small{font:11px Arial,sans-serif;margin-top:12px;color:#665e4c;}
+.library-book a{color:#3f684d;margin-top:15px;text-decoration:underline;text-underline-offset:4px;align-self:start;}
+.library-authors{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;}
+.library-author{min-width:0;min-height:180px;padding:17px;background:var(--cream);border:1px solid #19221b44;display:flex;flex-direction:column;}
+.library-author>span{color:var(--r)}.library-author>strong{display:grid;place-items:center;width:44px;height:44px;margin:14px 0 8px;background:#2d4532;color:#f4e7d0;font:italic 27px Georgia,serif;}
+.library-author h3{font-size:clamp(19px,1.8vw,27px);line-height:1.1;overflow-wrap:anywhere;margin:0 0 10px;}
+.library-author p{margin:auto 0 0;color:#655a4f;}
+.library-empty{padding:40px 20px;border:1px dashed var(--i);text-align:center;}
+.library-empty strong{font-size:25px;}.library-empty p{font:15px Arial,sans-serif;}
+.library-note{display:grid;grid-template-columns:55px 1.2fr .8fr;gap:25px;padding:50px 5vw;background:#1b2b20;color:#f5e9d4;align-items:start;}
+.library-note>span{font-size:55px;color:#ddad56}.library-note h2{font-size:clamp(28px,3.4vw,52px);letter-spacing:-.04em;line-height:1.05;margin:0;}
+.library-note p{font-size:17px;line-height:1.5;margin:0;}
+.library-footer{display:flex;justify-content:space-between;gap:16px;background:#131c16;color:#f0e4d1;padding:28px 5vw;}
+.library-home-card{background:#1b2921;color:#f1e7d2;padding:clamp(40px,6vw,85px) 6vw;display:grid;grid-template-columns:1.4fr .6fr;gap:35px;align-items:center;}
+.library-home-card>div>span{font:800 11px Arial,sans-serif;letter-spacing:.15em;color:#e0ae56;}
+.library-home-card h2{font:normal clamp(44px,5vw,73px)/.96 Georgia,serif;margin:15px 0;}
+.library-home-card h2 em{display:block;color:#e0c28b}.library-home-card p{font:16px/1.5 Arial,sans-serif;max-width:550px;}
+.library-home-card>a{justify-self:center;display:inline-block;border:1px solid #e0c28b;padding:20px;font:800 12px Arial,sans-serif;letter-spacing:.1em;}
+.library-home-card>a:hover{background:#e0c28b;color:#1b2921;}
+@media(max-width:960px){.library-hero{grid-template-columns:1fr;}.library-hero-aside{max-width:530px;}.library-books{grid-template-columns:repeat(2,minmax(0,1fr));}.library-authors{grid-template-columns:repeat(3,minmax(0,1fr));}.library-stats>div{display:block;}.library-stats b{display:block;}.library-note{grid-template-columns:50px 1fr;}.library-note p{grid-column:2;}}
+@media(max-width:620px){.library-nav{grid-template-columns:1fr auto;padding:16px;}.library-nav>span{display:none;}.library-logo{font-size:11px;}.library-hero{padding:42px 18px;gap:25px;}.library-hero h1{font-size:clamp(49px,13vw,74px);}.library-stats>div{padding:17px 10px;}.library-stats b{font-size:35px;}.library-stats span{font-size:9px;letter-spacing:0;}.library-index{padding:35px 16px;}.library-index-head{display:block;}.library-index-head>p{margin:14px 0 0;}.library-tabs button{flex:1;padding:13px 9px;font-size:11px;}.library-tabs button span{display:none;}.library-controls{grid-template-columns:1fr;gap:15px;}.library-result-count span{display:none;}.library-books{grid-template-columns:1fr;}.library-book{min-height:260px;}.library-book h3{font-size:29px;}.library-authors{grid-template-columns:repeat(2,minmax(0,1fr));}.library-note{display:block;padding:38px 18px;}.library-note p{margin-top:20px;}.library-home-card{grid-template-columns:1fr;}.library-home-card>a{justify-self:start;}.library-footer{font-size:9px;}}
+
+/* Navegación autor ↔ obras, visible y utilizable con teclado/tacto. */
+.library-active-author{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin:18px 0;padding:15px 18px;background:#e6d8b9;border-left:5px solid #567052;font:14px/1.45 Arial,sans-serif;}
+.library-active-author button{cursor:pointer;background:transparent;border:1px solid #19221b;padding:10px 12px;font:700 12px Arial,sans-serif;color:#19221b;}
+.library-author-works{margin-top:auto;align-self:start;cursor:pointer;border:0;border-bottom:1px solid #365b43;background:transparent;padding:8px 0 4px;color:#365b43;font:800 11px/1.5 Arial,sans-serif;letter-spacing:.04em;text-align:left;}
+.library-author-works span{margin-left:8px;}
+.library-author-works:hover,.library-author-works:focus-visible{color:#1b3424;border-bottom-color:currentColor;}
+@media(max-width:620px){.library-active-author{padding:13px 15px;}.library-active-author button{width:100%;text-align:left;}.library-author-works{font-size:10px;}}
+
+/* Cronologías contextuales: se abren DENTRO de la tarjeta, no como línea global. */
+.library-book--expanded,.library-author--expanded{grid-column:1/-1;box-shadow:0 14px 35px #1b2b2022;}
+.library-timeline-toggle{cursor:pointer;margin-top:16px;align-self:flex-start;min-height:44px;padding:10px 14px;border:1px solid currentColor;background:transparent;color:var(--i);font:800 11px/1.4 Arial,sans-serif;letter-spacing:.05em;text-align:left;}
+.library-timeline-toggle:hover,.library-timeline-toggle[aria-expanded="true"]{background:var(--i);color:var(--cream);}
+.library-timeline-container{width:100%;min-width:0;position:relative;z-index:1;margin-top:22px;border-top:2px solid var(--i);padding-top:22px;}
+.library-timeline{display:grid;grid-template-columns:minmax(180px,260px) minmax(0,1fr);gap:clamp(16px,3vw,44px);font-family:Arial,sans-serif;}
+.library-timeline-header>span{font:800 10px Arial,sans-serif;color:var(--r);letter-spacing:.12em;}
+.library-timeline-header h4{font:normal 31px/1.08 Georgia,serif;letter-spacing:-.025em;margin:10px 0;}
+.library-timeline-header p{font:14px/1.55 Arial,sans-serif;margin:10px 0;color:#4a5044;}
+.library-timeline-list{list-style:none;margin:0;padding:0 0 0 18px;border-left:2px solid #a18d64;max-height:520px;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;}
+.library-timeline-entry{position:relative;display:grid;grid-template-columns:minmax(110px,145px) minmax(0,1fr);gap:14px;padding:0 12px 24px 15px;min-width:0;}
+.library-timeline-entry:before{content:'';position:absolute;left:-7px;top:5px;width:11px;height:11px;border-radius:50%;background:var(--green);border:2px solid var(--cream);}
+.library-timeline-date{display:flex;flex-direction:column;gap:5px;min-width:0;}
+.library-timeline-date time{font:800 12px Arial,sans-serif;color:var(--r);font-variant-numeric:tabular-nums;}
+.library-timeline-date small{font:11px/1.3 Arial,sans-serif;color:#60594c;}
+.library-timeline-info{min-width:0;display:flex;flex-direction:column;gap:5px;}
+.library-timeline-info strong{font:600 16px/1.3 Georgia,serif;overflow-wrap:anywhere;}
+.library-timeline-info>span,.library-timeline-info>small{font:11px/1.4 Arial,sans-serif;color:#665d4e;}
+.library-timeline-info>a{font:800 11px/1.4 Arial,sans-serif;color:#2b6649;text-decoration:underline;text-underline-offset:4px;align-self:start;margin-top:4px;}
+.library-timeline-empty{font:14px/1.5 Arial,sans-serif;max-width:500px;margin:0;}
+.library-author--expanded .library-timeline-toggle{margin-top:15px;}
+.library-book--expanded .library-book-author{margin-top:28px;}
+.library-shell .library-timeline-toggle:focus-visible{outline:3px solid var(--r);outline-offset:3px;}
+@media(max-width:760px){.library-timeline{grid-template-columns:1fr;}.library-timeline-list{max-height:440px;}}
+@media(max-width:470px){.library-timeline-entry{grid-template-columns:1fr;gap:7px;}.library-timeline-date{flex-direction:row;flex-wrap:wrap;align-items:baseline;gap:9px;}.library-timeline-container{margin-top:18px;}.library-timeline-header h4{font-size:27px;}}
+
+.library-record-source{font:11px/1.45 Arial,sans-serif;color:#655a4d;letter-spacing:.01em;margin:0 0 14px;}
+
+/* Red bidireccional obra ↔ autor en el detalle de cada tarjeta. */
+.library-connected-records{margin:0 0 24px;padding:0 0 20px;border-bottom:1px solid #83785e55;}
+.library-connected-records h4{font:800 11px/1.4 Arial,sans-serif;letter-spacing:.09em;text-transform:uppercase;margin:0 0 12px;color:var(--r);}
+.library-connected-records-list{display:flex;flex-wrap:wrap;gap:8px;}
+.library-related-work,.library-work-author-link{cursor:pointer;background:#e6dac0;color:#263e2b;border:1px solid #51674f;min-height:44px;max-width:100%;text-align:left;overflow-wrap:anywhere;font:700 12px/1.4 Arial,sans-serif;padding:11px 14px;}
+.library-related-work:hover,.library-related-work:focus-visible,.library-work-author-link:hover,.library-work-author-link:focus-visible{background:#243c2c;color:#f5ecda;}
+@media(max-width:620px){.library-related-work,.library-work-author-link{width:100%;}}
+
+/* APA: referencia por obra plegable, sangría francesa e itálicas, sin ensanchar tarjetas. */
+.library-apa-details{border-top:1px solid #85775c55;margin-top:18px;padding-top:8px;width:100%;min-width:0;}
+.library-apa-details summary{min-height:44px;display:flex;align-items:center;justify-content:space-between;gap:12px;cursor:pointer;font:800 11px/1.4 Arial,sans-serif;letter-spacing:.07em;color:#3b5640;list-style:none;}
+.library-apa-details summary::-webkit-details-marker{display:none;}
+.library-apa-details summary span{transition:transform .15s ease;}
+.library-apa-details[open] summary span{transform:rotate(90deg);}
+.library-apa-content{background:#f0e8d8;border-left:3px solid #65805e;padding:16px;min-width:0;margin:4px 0 16px;}
+.library-apa-reference{font:14px/1.65 Georgia,serif;color:#1b281e;margin:0 0 14px;overflow-wrap:anywhere;padding-left:1.2em;text-indent:-1.2em;user-select:text;}
+.library-apa-reference em{font-style:italic;}
+.library-apa-note,.library-apa-study{font:12px/1.6 Arial,sans-serif;color:#5d523f;margin:0 0 8px;}
+.library-apa-note strong{font-weight:800;color:#8d4b32;}
+.library-apa-actions{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:12px;}
+.library-apa-copy{cursor:pointer;min-height:44px;padding:10px 14px;border:1px solid #3b5640;background:#3b5640;color:#faf3e6;font:700 12px Arial,sans-serif;}
+.library-apa-copy:hover{background:#203624;}
+.library-apa-actions [role=status]{font:12px/1.3 Arial,sans-serif;color:#3b5640;}
+.library-apa-details summary:focus-visible,.library-apa-copy:focus-visible{outline:3px solid #a25738;outline-offset:2px;}
+@media(max-width:470px){.library-apa-content{padding:12px;}.library-apa-reference{font-size:13px;}}
+
+.library-cartography-launch{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:24px;padding:30px 5vw;background:#192631;color:#f0f4f7;border-bottom:5px solid #4589ff;font-family:Arial,sans-serif;}
+.library-cartography-launch>div{max-width:640px;}
+.library-cartography-launch span{display:block;font:700 10px ui-monospace,monospace;letter-spacing:.15em;color:#86c1ff;margin-bottom:10px;}
+.library-cartography-launch strong{display:block;font:500 clamp(23px,3vw,36px)/1.1 Arial,sans-serif;}
+.library-cartography-launch p{color:#d0dbe4;font:14px/1.5 Arial,sans-serif;margin:9px 0 0;}
+.library-cartography-launch>a,.library-map-link{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:12px 15px;border:1px solid #86b7ff;background:#2b4a74;color:#fff;text-decoration:none;font:700 12px/1.35 Arial,sans-serif;max-width:100%;overflow-wrap:anywhere;}
+.library-cartography-launch>a:hover,.library-map-link:hover{background:#3867a4;text-decoration:underline;}
+.library-map-link{margin-top:12px;align-self:flex-start;color:#fff!important;}
+@media(max-width:600px){.library-cartography-launch>a{width:100%;}}
+
+/* ETHOS en la ficha bibliográfica de Cicerón: azul egeo, friso y lectura progresiva. */
+.library-ideas-details{margin:18px 0 4px;min-width:0;border:1px solid #87a5c2;border-top:4px solid #1a365d;background:#f6f9ff;overflow-wrap:anywhere;}
+.library-ideas-details summary{list-style:none;min-height:48px;cursor:pointer;padding:12px 15px;display:flex;align-items:center;justify-content:space-between;gap:8px;color:#1a365d;font:800 12px/1.4 Arial,sans-serif;}
+.library-ideas-details summary::-webkit-details-marker{display:none;}
+.library-ideas-details summary:focus-visible{outline:3px solid #1a365d;outline-offset:-3px;}
+.library-ideas-content{padding:12px 16px 16px;border-top:1px solid #cad8e5;background:linear-gradient(90deg,#1a365d 0 5px,transparent 5px) left top/18px 5px repeat-x,#f6f9ff;}
+.library-ideas-content>p{font:12px/1.5 Arial,sans-serif;color:#35506e;margin:10px 0 15px;}
+.library-ideas-content ol{list-style:none;display:grid;grid-template-columns:1fr;gap:9px;margin:0;padding:0;}
+.library-ideas-content li{display:grid;gap:6px;padding:12px;background:#fff;border-left:3px solid #b89758;min-width:0;}
+.library-ideas-content li strong{font:600 15px/1.3 Georgia,serif;color:#1a365d;}
+.library-ideas-content li span{font:13px/1.5 Arial,sans-serif;color:#273e52;}
+@media(max-width:470px){.library-ideas-content{padding:10px;}.library-ideas-content li{padding:10px;}}
+

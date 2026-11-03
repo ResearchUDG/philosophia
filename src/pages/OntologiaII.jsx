@@ -522,6 +522,44 @@ export default function OntologiaII() {
           </div>
         </Link>
 
+
+        <Link
+          to="/semestre/5/ontologia-ii/clase/19-octubre"
+          className="ontology-program-class-card"
+        >
+          <div className="ontology-program-date">
+            <strong>XIX</strong>
+            <span>X · MMXXVI</span>
+          </div>
+          <div className="ontology-program-class-copy">
+            <span>Decimocuarta clase · Hegel y Marx</span>
+            <h3>La negación que hace historia</h3>
+            <p>
+              Ciencia de la lógica, controversia ontológica con Kant,
+              negación determinada, Fenomenología, Marx, enajenación
+              y aplicaciones históricas.
+            </p>
+          </div>
+          <div className="ontology-program-enter"><span>Abrir folio</span><b>↗</b></div>
+        </Link>
+
+
+        <Link
+          to="/semestre/5/ontologia-ii/clase/26-octubre"
+          className="ontology-program-class-card"
+        >
+          <div className="ontology-program-date">
+            <strong>XXVI</strong>
+            <span>X · MMXXVI</span>
+          </div>
+          <div className="ontology-program-class-copy">
+            <span>Clase del 26 de octubre · Ontología II</span>
+            <h3>Historia, progreso y praxis</h3>
+            <p>Del socialismo real a la crítica del progreso técnico. Aviso de examen: 10 preguntas, entrega el viernes 30 de octubre por correo en Word.</p>
+          </div>
+          <div className="ontology-program-enter"><span>Abrir folio</span><b>↗</b></div>
+        </Link>
+
       </section>
 
       <section className="ontology-program-classes ontology-program-thresholds">
@@ -607,6 +645,22 @@ export default function OntologiaII() {
         </Link>
 
         <Link
+          to="/tareas/ontologia-ii/marx-hegel-bloch-feuerbach/sistema"
+          className="ontology-program-class-card"
+        >
+          <div className="ontology-program-date">
+            <strong>XIX</strong>
+            <span>X · 2026</span>
+          </div>
+          <div className="ontology-program-class-copy">
+            <span>Lecturas del profesor · sistema 2D independiente</span>
+            <h3>Marx, Bloch y Feuerbach · tres lecturas completas</h3>
+            <p>Crítica de Marx a Hegel, capítulo XIX de Bloch y las once tesis sobre Feuerbach; 74 folios documentales, guía completa e inspector con análisis de cada fuente.</p>
+          </div>
+          <div className="ontology-program-enter"><span>Abrir sistema 2D</span><b>↗</b></div>
+        </Link>
+
+        <Link
           to="/estudios/ontologia-ii/marx-critica-dialectica-hegeliana"
           className="ontology-program-class-card"
         >
@@ -687,6 +741,42 @@ export default function OntologiaII() {
           La lista combina bibliografía básica del programa con
           algunos de los materiales de apoyo disponibles para el
           curso. Los archivos originales no se publican en el sitio.
+        </p>
+        <div className="ontology-program-heading">
+          <span>21 · X</span>
+          <div>
+            <p>Recomendaciones de clase · 21 de octubre de 2026</p>
+            <h2>Hegel: génesis y reconocimiento</h2>
+          </div>
+        </div>
+
+        <div className="ontology-program-reading-list">
+          <article>
+            <span>R1</span>
+            <div>
+              <p>Wilhelm Dilthey · recomendación</p>
+              <h3>Hegel y el idealismo</h3>
+              <small>FCE (1944). Formación histórica del idealismo, escritos juveniles.</small>
+              <p><Link to={"/biblioteca?obra="+encodeURIComponent("Dilthey - Hegel y el idealismo")}>
+                Abrir ficha bibliográfica y claves de lectura ↗
+              </Link></p>
+            </div>
+          </article>
+          <article>
+            <span>R2</span>
+            <div>
+              <p>Carlos Rendón · ensayo recomendado</p>
+              <h3>La lucha por el reconocimiento (1803/1804)</h3>
+              <small>Areté 14(2), 271–287 (2002). Doce claves del texto: familia, lucha, contradicción y eticidad.</small>
+              <p><Link to={"/biblioteca?obra="+encodeURIComponent("Rendón - La lucha por el reconocimiento en el fragmento de 1803-1804 de Hegel")}>
+                Abrir análisis bibliográfico y cartografía 2D ↗
+              </Link></p>
+            </div>
+          </article>
+        </div>
+        <p className="ontology-program-source-note">
+          Recomendaciones comunicadas para la misma sesión; no equivalen a tareas obligatorias
+          ni a una clase íntegra documentada. El PDF de Rendón se analizó para su ficha académica.
         </p>
       </section>
 

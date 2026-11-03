@@ -1,0 +1,184 @@
+name: Validate PHILOSOPHIA (PR and manual)
+
+on:
+  pull_request:
+    branches:
+      - main
+      - 'release/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: qa-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Setup Node
+        uses: actions/setup-node@v6
+        with:
+          node-version: lts/*
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Validate 2D invariants
+        run: npm run test:2d
+
+      - name: Validate editorial pilot
+        run: npm run test:editorial
+
+      - name: Validate dialectical archive and source integrity
+        run: node --test tests/critical-dialectical-archive.test.mjs tests/critical-class18-thematic.test.mjs tests/critical-theory-image-licensing.test.mjs tests/critical-class18-section-study.test.mjs tests/critical-class20-study.test.mjs tests/critical-class25-study.test.mjs tests/critical-class27-study.test.mjs tests/critical-class01sep-study.test.mjs tests/critical-class03sep-study.test.mjs tests/critical-class10sep-study.test.mjs tests/critical-class17sep-study.test.mjs tests/critical-class22sep-study.test.mjs tests/critical-class24sep-study.test.mjs tests/critical-class15oct-study.test.mjs tests/critical-class20oct-study.test.mjs tests/critical-class22oct-study.test.mjs tests/critical-theory-29oct.test.mjs
+
+      - name: Lint dialectical archive
+        run: npx eslint src/data/dialecticalArchive.js src/data/critical18Themes.js src/data/critical18Sections.js src/data/critical20Themes.js src/data/critical20Sections.js src/data/critical25Themes.js src/data/critical25Sections.js src/data/critical25Image.js src/data/critical27Themes.js src/data/critical27Sections.js src/data/critical27Image.js src/data/critical01SepThemes.js src/data/critical01SepSections.js src/data/critical01SepImage.js src/data/critical03SepThemes.js src/data/critical03SepSections.js src/data/critical03SepImage.js src/data/critical10SepThemes.js src/data/critical10SepSections.js src/data/critical10SepImage.js src/data/critical17SepThemes.js src/data/critical17SepSections.js src/data/critical17SepImage.js src/data/critical22SepThemes.js src/data/critical22SepSections.js src/data/critical22SepImage.js src/data/critical24SepThemes.js src/data/critical24SepSections.js src/data/critical24SepSourceSections.js src/data/critical24SepImage.js src/data/critical15OctThemes.js src/data/critical15OctSections.js src/data/critical15OctSourceSections.js src/data/critical15OctImage.js src/data/critical20OctThemes.js src/data/critical20OctSections.js src/data/critical20OctSourceSections.js src/data/critical20OctImage.js src/data/criticalTheoryImages.js src/components/critical/Critical18ThematicAtlas.jsx src/components/critical/Critical18SectionStudy.jsx src/components/critical/Critical20ThematicAtlas.jsx src/components/critical/Critical20SectionStudy.jsx src/components/critical/Critical25ThematicAtlas.jsx src/components/critical/Critical25SectionStudy.jsx src/components/critical/Critical27ThematicAtlas.jsx src/components/critical/Critical27SectionStudy.jsx src/components/critical/Critical01SepThematicAtlas.jsx src/components/critical/Critical01SepSectionStudy.jsx src/components/critical/Critical03SepThematicAtlas.jsx src/components/critical/Critical03SepSectionStudy.jsx src/components/critical/Critical10SepThematicAtlas.jsx src/components/critical/Critical10SepSectionStudy.jsx src/components/critical/Critical17SepThematicAtlas.jsx src/components/critical/Critical17SepSectionStudy.jsx src/components/critical/Critical22SepThematicAtlas.jsx src/components/critical/Critical22SepSectionStudy.jsx src/components/critical/Critical24SepThematicAtlas.jsx src/components/critical/Critical24SepSectionStudy.jsx src/components/critical/Critical15OctThematicAtlas.jsx src/components/critical/Critical15OctSectionStudy.jsx src/components/critical/Critical20OctThematicAtlas.jsx src/components/critical/Critical20OctSectionStudy.jsx src/pages/DialecticalArchive.jsx src/pages/CriticalTheoryClass18Aug.jsx src/pages/CriticalTheoryClass20Aug.jsx src/pages/CriticalTheoryClass25Aug.jsx src/pages/CriticalTheoryClass27Aug.jsx src/pages/CriticalTheoryClass01Sep.jsx src/pages/CriticalTheoryClass03Sep.jsx src/pages/CriticalTheoryClass10Sep.jsx src/pages/CriticalTheoryClass17Sep.jsx src/pages/CriticalTheoryClass22Sep.jsx src/pages/CriticalTheoryClass24Sep.jsx src/pages/CriticalTheoryClass15Oct.jsx src/pages/CriticalTheoryClass20Oct.jsx tests/critical-dialectical-archive.test.mjs tests/critical-class18-thematic.test.mjs tests/critical-class18-section-study.test.mjs tests/critical-class20-study.test.mjs tests/critical-class25-study.test.mjs tests/critical-class27-study.test.mjs tests/critical-class01sep-study.test.mjs tests/critical-class03sep-study.test.mjs tests/critical-class10sep-study.test.mjs tests/critical-class17sep-study.test.mjs tests/critical-class22sep-study.test.mjs tests/critical-class24sep-study.test.mjs tests/critical-class15oct-study.test.mjs tests/critical-class20oct-study.test.mjs tests/critical-theory-image-licensing.test.mjs tests/critical-class18-browser-smoke.mjs tests/critical-class20-browser-smoke.mjs tests/critical-class25-browser-smoke.mjs tests/critical-class27-browser-smoke.mjs tests/critical-class01sep-browser-smoke.mjs tests/critical-class03sep-browser-smoke.mjs tests/critical-class10sep-browser-smoke.mjs tests/critical-class17sep-browser-smoke.mjs tests/critical-class22sep-browser-smoke.mjs tests/critical-class24sep-browser-smoke.mjs tests/critical-class15oct-browser-smoke.mjs tests/critical-class20oct-browser-smoke.mjs src/data/critical22OctThemes.js src/data/critical22OctSections.js src/data/critical22OctSourceSections.js src/data/critical22OctImage.js src/components/critical/Critical22OctThematicAtlas.jsx src/components/critical/Critical22OctSectionStudy.jsx src/pages/CriticalTheoryClass22Oct.jsx tests/critical-class22oct-study.test.mjs tests/critical-class22oct-browser-smoke.mjs src/pages/CriticalTheoryClass29Oct.jsx tests/critical-theory-29oct.test.mjs tests/critical-class29oct-browser-smoke.mjs
+
+      - name: Validate library catalogue
+        run: node --test tests/library-catalog.test.mjs tests/library-navigation.test.mjs tests/library-timeline.test.mjs tests/library-academic-connections.test.mjs tests/library-governance.test.mjs tests/library-apa.test.mjs tests/library-graph.test.mjs tests/library-class-references.test.mjs
+
+      - name: Validate Nava technoscience 2D
+        run: node --test tests/nava-technoscience.test.mjs
+
+      - name: Lint library source
+        run: npx eslint src/data/libraryCatalog.js src/data/libraryCatalogUtils.js src/pages/PhilosophiaLibrary.jsx src/data/libraryTimelines.js src/data/libraryClassReferences.js src/data/libraryReferenceTimelines.js src/data/classReferences/*.js src/data/libraryAcademicConnections.js src/data/libraryApa.js src/data/libraryApaMetadata.js src/data/libraryGraph.js src/pages/LibraryCartography.jsx
+
+      - name: Lint Lukács ontology system
+        run: npx eslint src/data/lukacsOntologySystem.js src/components/lukacs/LukacsOntologyNode.jsx src/pages/LukacsOntologySystem.jsx tests/lukacs-ontology-system.test.mjs tests/lukacs-ontology-browser-smoke.mjs
+
+      - name: Lint Methods 19 October system
+        run: npx eslint src/pages/MethodsClass19Oct.jsx tests/methods-class-19oct.test.mjs
+
+      - name: Lint Methods 21 October system
+        run: npx eslint src/pages/MethodsClass21Oct.jsx tests/methods-class-21oct.test.mjs tests/methods-class21-browser-smoke.mjs
+
+      - name: Lint phenomenology projection system
+        run: npx eslint src/pages/MethodsPhenomenologySystem2D.jsx tests/methods-phenomenology-system2d.test.mjs tests/methods-phenomenology-browser-smoke.mjs
+
+      - name: Lint Analytic Philosophy 19 October class
+        run: npx eslint src/pages/AnalyticClass19Oct.jsx src/data/glockClass19Oct.js tests/analytic-class-19oct.test.mjs tests/analytic-class19-browser-smoke.mjs
+
+      - name: Lint Nava 2D and source model
+        run: npx eslint src/pages/NavaTechnoscienceSystem.jsx src/data/navaTechnoscience2026.js tests/nava-technoscience.test.mjs tests/nava-technoscience-browser-smoke.mjs
+
+      - name: Lint Marx Bloch Feuerbach independent atlas
+        run: npx eslint src/data/marxHegelThreeReadings.js src/pages/MarxHegelThreeReadingsSystem.jsx tests/marx-hegel-three-readings-system.test.mjs tests/marx-hegel-three-readings-browser-smoke.mjs
+
+      - name: Lint Hartmann functional browser test
+        run: npx eslint tests/hartmann-chapter1-browser-smoke.mjs
+
+      - name: Lint mobile 2D survival regression
+        run: npx eslint src/components/philosophy/system2d/mobilePerformance.js tests/system2d-mobile-performance.test.mjs tests/system2d-mobile-survival-browser-smoke.mjs
+
+      - name: Validate Café Filosófico 05 editorial data
+        run: node --test tests/cafe-redes-sociales.test.mjs
+
+      - name: Lint Café Filosófico 05
+        run: npx eslint src/pages/CafeRedesSocialesEvent.tsx tests/cafe-redes-sociales.test.mjs tests/cafe-redes-sociales-browser-smoke.mjs
+
+      - name: Build
+        env:
+          VITE_ONESIGNAL_APP_ID: ${{ vars.ONESIGNAL_APP_ID }}
+        run: npm run build
+
+      - name: Validate Café Filosófico 05 (desktop, iPad, phone)
+        run: node tests/cafe-redes-sociales-browser-smoke.mjs
+
+      - name: Validate Ethics class 29 October (desktop, iPad, phone)
+        run: node tests/ethics-class-29oct-browser-smoke.mjs
+
+      - name: Validate dialectics presentation isolation (33 slides · desktop and phone)
+        run: node tests/dialectica-presentacion-browser-smoke.mjs
+
+      - name: Validate Critical Theory class 18 August (desktop, iPad, phone)
+        run: node tests/critical-class18-browser-smoke.mjs
+
+      - name: Validate Critical Theory class 20 August (desktop, iPad, phone)
+        run: node tests/critical-class20-browser-smoke.mjs
+
+      - name: Validate Critical Theory class 25 August (desktop, iPad, phone)
+        run: node tests/critical-class25-browser-smoke.mjs
+
+      - name: Validate Critical Theory class 27 August (desktop, iPad, phone)
+        run: node tests/critical-class27-browser-smoke.mjs
+
+      - name: Validate Critical Theory class 1 September (desktop, iPad, phone)
+        run: node tests/critical-class01sep-browser-smoke.mjs
+
+      - name: Validate Critical Theory class 3 September (desktop, iPad, phone)
+        run: node tests/critical-class03sep-browser-smoke.mjs
+
+      - name: Validate Critical Theory class 10 September (desktop, iPad, phone)
+        run: node tests/critical-class10sep-browser-smoke.mjs
+
+      - name: Validate Critical Theory class 17 September (desktop, iPad, phone)
+        run: node tests/critical-class17sep-browser-smoke.mjs
+
+      - name: Validate Critical Theory class 22 September (desktop, iPad, phone)
+        run: node tests/critical-class22sep-browser-smoke.mjs
+
+      - name: Validate Critical Theory class 24 September (desktop, iPad, phone)
+        run: node tests/critical-class24sep-browser-smoke.mjs
+
+      - name: Validate Critical Theory class 15 October (desktop, iPad, phone)
+        run: node tests/critical-class15oct-browser-smoke.mjs
+
+      - name: Validate Critical Theory class 20 October (desktop, iPad, phone)
+        run: node tests/critical-class20oct-browser-smoke.mjs
+
+      - name: Validate Critical Theory class 22 October (desktop, iPad, phone)
+        run: node tests/critical-class22oct-browser-smoke.mjs
+
+      - name: Validate Critical Theory class 29 October (desktop, iPad, phone)
+        run: node tests/critical-class29oct-browser-smoke.mjs
+
+      - name: Validate Freud Chapter I 2D and floating folios (desktop, tablet, phone)
+        run: node tests/freud-capitulo-i-browser-smoke.mjs
+
+      - name: Validate Methods 21 October in Chromium (desktop, iPad and phone)
+        run: node tests/methods-class21-browser-smoke.mjs
+
+      - name: Validate phenomenology projection system (desktop, iPad and phone)
+        run: node tests/methods-phenomenology-browser-smoke.mjs
+
+      - name: Validate Glock in headless browser (desktop, phone and iPad)
+        run: node tests/glock-browser-smoke.mjs
+
+      - name: Validate Analytic Philosophy 19 October class in Chromium
+        run: node tests/analytic-class19-browser-smoke.mjs
+
+      - name: Validate Kołakowski positivism 2D (desktop, iPad, phone)
+        run: node tests/kolakowski-positivism-browser-smoke.mjs
+
+      - name: Validate Nava 2D in Chromium (desktop, phone and iPad)
+        run: node tests/nava-technoscience-browser-smoke.mjs
+
+      - name: Validate library in headless browser (phone and iPad)
+        run: node tests/library-browser-smoke.mjs
+
+      - name: Validate Lukács ontology in headless browser (phone and iPad)
+        run: node tests/lukacs-ontology-browser-smoke.mjs
+
+      - name: Validate Hegel teacher folios in Chromium (tablet)
+        run: node tests/hegel-teacher-browser-smoke.mjs
+
+      - name: Validate Marx Bloch Feuerbach 2D in Chromium (desktop, phone, iPad)
+        run: node tests/marx-hegel-three-readings-browser-smoke.mjs
+
+      - name: Validate Hartmann chapter I 2D in Chromium (desktop, tablet and phone)
+        run: node tests/hartmann-chapter1-browser-smoke.mjs
+
+      - name: Validate legacy 2D survival in Chromium mobile
+        run: node tests/system2d-mobile-survival-browser-smoke.mjs
+
+      - name: Validate Café del Agua in Chromium (phone and tablet)
+        run: node tests/cafe-agua-browser-smoke.mjs

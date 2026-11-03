@@ -1,10 +1,12 @@
 import { Handle, Position } from '@xyflow/react'
+import './LukacsReificationNode.css'
 
 export default function LukacsReificationNode({ data, selected }) {
   return (
     <div
       className={[
         'marx-flow-node',
+        'lukacs-flow-node',
         data.critical ? 'is-critical' : '',
         data.micro ? 'is-micro' : '',
         selected ? 'is-selected' : '',
@@ -33,11 +35,19 @@ export default function LukacsReificationNode({ data, selected }) {
         <b>{data.code}</b>
       </div>
 
-      <strong className="marx-flow-title">{data.title}</strong>
-      <blockquote>{data.excerpt}</blockquote>
+      <strong className="marx-flow-title nodrag nopan nowheel" tabIndex={0}>{data.title}</strong>
+      <p className="lukacs-node-summary nodrag nopan nowheel" tabIndex={0}><b>SÍNTESIS</b> {data.excerpt}</p>
+
+      {data.sourcePassage && (
+        <section className="lukacs-node-reading" aria-label="Pasaje directo de la lectura">
+          <span>EN EL TEXTO · PDF P. {data.sourcePdfPage}</span>
+          <blockquote className="nodrag nopan nowheel" tabIndex={0}>{data.sourcePassage}</blockquote>
+          <small>Deslice para continuar · folio para lectura amplia</small>
+        </section>
+      )}
 
       {data.diagram?.length > 0 && (
-        <div className="marx-node-diagram" aria-label="Esquema del nodo">
+        <div className="marx-node-diagram nodrag nopan nowheel" tabIndex={0} aria-label="Esquema del nodo">
           {data.diagram.map((part, index) => (
             <span key={`${data.code}-${index}-${part}`}>{part}</span>
           ))}

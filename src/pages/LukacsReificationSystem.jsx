@@ -1,3 +1,5 @@
+import SectionPedagogy from '../components/philosophy/system2d/SectionPedagogy'
+import { initialSystem2DRoute, useSystem2DCompactViewport } from '../components/philosophy/system2d/mobilePerformance.js'
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { Link } from 'react-router'
 import { createPortal } from 'react-dom'
@@ -54,7 +56,8 @@ function relatedSet(id, includeConceptual = false) {
 }
 
 function StudyCanvas() {
-  const [route, setRoute] = useState('all')
+  const [route, setRoute] = useState(() => initialSystem2DRoute(lukacsReificationRoutes))
+  const compactViewport = useSystem2DCompactViewport()
   const [selectedId, setSelectedId] = useState(null)
   const [folioId, setFolioId] = useState(null)
   const [relationId, setRelationId] = useState(null)
@@ -477,7 +480,9 @@ function StudyCanvas() {
             <div>
               <span>{guidedCurrent.data.phase} · p. {guidedCurrent.data.page}</span>
               <strong>{guidedCurrent.data.code} · {guidedCurrent.data.title}</strong>
-              <blockquote>{guidedCurrent.data.excerpt}</blockquote>
+              <p className="lukacs-guided-summary">Síntesis: {guidedCurrent.data.excerpt}</p>
+              <span className="lukacs-source-caption">PASO DEL TEXTO · PDF P. {guidedCurrent.data.sourcePdfPage}</span>
+              <blockquote className="lukacs-source-long">{guidedCurrent.data.sourcePassage}</blockquote>
             </div>
             <aside>
               <span>FUNCIÓN EN EL ARGUMENTO</span>
@@ -512,7 +517,7 @@ function StudyCanvas() {
                 setGuidedMode(false)
                 setRoute(item.id)
                 setSelectedId(null)
-                if (item.id === 'all') {
+                if (item.id === 'all' && !compactViewport) {
                   setTimeout(() => fitView({ padding:0.08, duration:500 }), 0)
                 }
               }}
@@ -541,7 +546,7 @@ function StudyCanvas() {
               setRoute('all')
               setSelectedId(null)
               setRelationId(null)
-              setTimeout(() => fitView({ padding:0.08, duration:500 }), 0)
+              if (!compactViewport) setTimeout(() => fitView({ padding:0.08, duration:500 }), 0)
             }}
           >
             Ver sistema completo
@@ -580,9 +585,10 @@ function StudyCanvas() {
 
           <div className="marx-flow-canvas">
             <ReactFlow
-              nodes={nodes}
-              edges={edges}
+              nodes={compactViewport ? nodes.filter((node) => !node.hidden) : nodes}
+              edges={compactViewport ? edges.filter((edge) => !edge.hidden) : edges}
               nodeTypes={nodeTypes}
+              onlyRenderVisibleElements={compactViewport && route === 'all'}
               onNodeClick={(_, node) => selectNode(node)}
               onEdgeClick={(event, edge) => {
                 if (!edge.relationSheetId) return
@@ -601,13 +607,25 @@ function StudyCanvas() {
             >
               <Background gap={32} size={1} />
               <Controls showInteractive={false} />
-              <MiniMap pannable zoomable nodeStrokeWidth={3} />
+              {!compactViewport && <MiniMap pannable zoomable nodeStrokeWidth={3} />} 
             </ReactFlow>
           </div>
         </div>
 
         <aside className="marx-inspector">
           <div className="marx-inspector-scroll">
+          <SectionPedagogy
+            nodes={lukacsReificationNodes}
+            routes={lukacsReificationRoutes}
+            activeRoute={route}
+            selectedId={selectedId}
+            onSectionChange={(id) => { setGuidedMode(false); setRoute(id); setSelectedId(null) }}
+            onFocusNode={(id) => {
+              setGuidedMode(false)
+              selectById(id)
+            }}
+          />
+
             {selected ? (
               <>
                 <div className="marx-inspector-head">
@@ -618,9 +636,14 @@ function StudyCanvas() {
                 <h2>{selected.data.title}</h2>
 
                 <section className="marx-inspector-text">
-                  <span>TEXTO / IDEA EXPLÍCITA</span>
-                  <blockquote>{selected.data.excerpt}</blockquote>
-                  <small>Lukács · p. {selected.data.page}</small>
+                  <span>PASAJE DEL TEXTO · PDF P. {selected.data.sourcePdfPage}</span>
+                  <blockquote className="lukacs-source-long">{selected.data.sourcePassage}</blockquote>
+                  <small>{selected.data.sourceAttribution} · página impresa: {selected.data.sourcePrintedPage} · verificar en PDF si persisten erratas</small>
+                </section>
+
+                <section className="lukacs-editorial-summary">
+                  <span>SÍNTESIS EDITORIAL (NO CITA)</span>
+                  <p>{selected.data.excerpt}</p>
                 </section>
 
                 <section>
@@ -820,9 +843,10 @@ function StudyCanvas() {
 
             <div className="marx-folio-grid">
               <section className="marx-folio-source">
-                <span>TEXTO / IDEA EXPLÍCITA</span>
-                <blockquote>{folio.data.excerpt}</blockquote>
-                <small>{lukacsReificationSource.author} · {lukacsReificationSource.title}</small>
+                <span>PASAJE DEL TEXTO · PDF P. {folio.data.sourcePdfPage}</span>
+                <blockquote className="lukacs-source-long">{folio.data.sourcePassage}</blockquote>
+                <small>{folio.data.sourceAttribution} · página impresa {folio.data.sourcePrintedPage} · la digitalización puede contener erratas</small>
+                <p className="lukacs-folio-summary"><strong>Síntesis editorial:</strong> {folio.data.excerpt}</p>
               </section>
 
               <section>

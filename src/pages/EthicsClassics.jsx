@@ -319,6 +319,58 @@ export default function EthicsClassics() {
 
 
 
+        <Link
+          to="/semestre/5/etica/clase/13-octubre"
+          className="ethicsx-class-card"
+        >
+          <div className="ethicsx-class-card-date">
+            <strong>XIII</strong>
+            <span>X · MMXXVI</span>
+          </div>
+          <div className="ethicsx-class-card-copy">
+            <span>Clase · Luciano de Samósata · §§27–48</span>
+            <h3>El banquete o los lapitas: sátira y coherencia de vida</h3>
+            <p>
+              Del ideal de sabiduría a la conducta de los filósofos: sátira,
+              exceso, crítica cínica, estoicismo contemporáneo y deber moral.
+            </p>
+          </div>
+          <div className="ethicsx-class-card-enter"><span>Abrir clase</span><b>↗</b></div>
+        </Link>
+
+        <Link to="/semestre/5/etica/clase/15-octubre" className="ethicsx-class-card">
+          <div className="ethicsx-class-card-date"><strong>XV</strong><span>X · MMXXVI</span></div>
+          <div className="ethicsx-class-card-copy">
+            <span>Clase · Platón, medicina hipocrática y cuidado</span>
+            <h3>La medicina del alma: Cármides y el cuidado de sí</h3>
+            <p>Templanza, Zalmoxis, dieta como modo de vida, médicos libres y esclavizados, salud y responsabilidad.</p>
+          </div>
+          <div className="ethicsx-class-card-enter"><span>Abrir clase</span><b>↗</b></div>
+        </Link>
+
+        <Link to="/semestre/5/etica/clase/20-octubre" className="ethicsx-class-card">
+          <div className="ethicsx-class-card-date"><strong>XX</strong><span>X · MMXXVI</span></div>
+          <div className="ethicsx-class-card-copy">
+            <span>Clase · Estoicismo · logos y destino</span>
+            <h3>Paradojas del sentido y eterno retorno</h3>
+            <p>Acción virtuosa y circunstancias, deber frente a obediencia, física estoica y cuatro esquemas de estudio.</p>
+          </div>
+          <div className="ethicsx-class-card-enter"><span>Abrir clase</span><b>↗</b></div>
+        </Link>
+        <Link to="/semestre/5/etica/clase/27-octubre" className="ethicsx-class-card">
+          <div className="ethicsx-class-card-date"><strong>XXVII</strong><span>X · MMXXVI</span></div>
+          <div className="ethicsx-class-card-copy"><span>Clase · Ética pública y estoicismo temprano</span><h3>Compromiso social y logos estoico</h3><p>Universidad pública, práctica filosófica, atomismo, destino, justicia y pensamiento mágico.</p></div>
+          <div className="ethicsx-class-card-enter"><span>Abrir clase</span><b>↗</b></div>
+        </Link>
+        <Link to="/semestre/5/etica/clase/29-octubre" className="ethicsx-class-card">
+          <div className="ethicsx-class-card-date"><strong>XXIX</strong><span>X · MMXXVI</span></div>
+          <div className="ethicsx-class-card-copy">
+            <span>Clase · Lecturas y problemas de la Stoa</span>
+            <h3>Razón, estima social y límites de la vida</h3>
+            <p>Cartas estoicas, examen del sentimiento, vergüenza, convivencia, protección de la vida y lectura propuesta.</p>
+          </div>
+          <div className="ethicsx-class-card-enter"><span>Abrir clase</span><b>↗</b></div>
+        </Link>
       </section>
 
       <section className="ethicsx-section ethicsx-note">

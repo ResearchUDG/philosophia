@@ -1,4 +1,5 @@
 import './CafeFilosofico.css'
+import { cafeAguaPhotos } from '../data/cafeAguaPhotos'
 
 const sessions = [
   {
@@ -58,15 +59,34 @@ const sessions = [
     date: '19 OCT 2026',
     title: 'Hablemos sobre el agua',
     description:
-      'Próximo encuentro sobre el agua como derecho, recurso, servicio o bien común; el consumo de agua embotellada y la responsabilidad frente a daños que todavía no son visibles.',
+      'Memoria del diálogo sobre crisis ecológica, infraestructura, planeación urbana, concesiones, justicia ambiental, ética colectiva y futuro del agua.',
     tags: ['Agua', 'Derecho', 'Recurso', 'Bien común', 'Responsabilidad'],
     route: '/cafe-filosofico/2026/10/19/agua',
     image: `${import.meta.env.BASE_URL}images/cafe-filosofico/agua/poster-original.svg`,
     imageMode: 'poster',
-    badge: 'PRÓXIMO ENCUENTRO',
-    actionLabel: 'Ver invitación',
+    badge: 'MEMORIA PUBLICADA',
+    actionLabel: 'Explorar memoria',
+    galleryMode: 'strip',
+    photos: cafeAguaPhotos.map((photo) =>
+      `${import.meta.env.BASE_URL}images/cafe-filosofico/agua/sesion-04/${photo.file}`
+    ),
   },
 
+
+
+  {
+    edition: 'EDICIÓN 05',
+    date: '03 NOV 2026',
+    title: 'Redes sociales',
+    description:
+      '¿Quién soy cuando me muestro? Una convocatoria para conversar sobre identidad digital, privacidad y reconocimiento cuantificado.',
+    tags: ['Redes sociales', 'Identidad', 'Privacidad', 'Visibilidad', 'Reconocimiento'],
+    route: '/cafe-filosofico/2026/11/03/redes-sociales',
+    image: `${import.meta.env.BASE_URL}images/cafe-filosofico/redes-sociales/poster-editorial.svg`,
+    imageMode: 'poster',
+    badge: 'PRÓXIMO · 03 NOV · 2:00 P. M.',
+    actionLabel: 'Conocer el encuentro',
+  },
 
 ]
 

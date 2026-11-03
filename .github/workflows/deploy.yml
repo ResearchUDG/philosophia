@@ -36,10 +36,16 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      # Las comprobaciones académicas y los smoke tests de cada
+      # sistema 2D se ejecutan en quality.yml (PR/manual).
+      # Evita que tests de contenidos ajenos bloqueen GitHub Pages.
       - name: Build
         env:
           VITE_ONESIGNAL_APP_ID: ${{ vars.ONESIGNAL_APP_ID }}
         run: npm run build
+
+      - name: Verify built artifact
+        run: test -s dist/index.html
 
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v6
@@ -52,3 +58,13 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v5
+
+      - name: Verify public Kołakowski route
+        env:
+          PAGE_URL: ${{ steps.deployment.outputs.page_url }}
+        run: node tests/kolakowski-production-smoke.mjs "${PAGE_URL}#/tareas/ontologia-ii/kolakowski-positivismo"
+
+      - name: Verify public Teoría Crítica 29 October and calendar
+        env:
+          PAGE_URL: ${{ steps.deployment.outputs.page_url }}
+        run: node tests/critical-theory-29oct-production-smoke.mjs "${PAGE_URL}"

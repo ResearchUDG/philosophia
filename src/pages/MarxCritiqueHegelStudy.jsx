@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Link } from 'react-router'
 import AnimatedConceptSchema from '../components/philosophy/schema/AnimatedConceptSchema'
+import MarxHegelAssignedAtlas from './MarxHegelAssignedAtlas'
 import '../components/OntologyArchiveClass.css'
 import './OntologiaClass17AugArchive.css'
 import './MarxCritiqueHegelStudy.css'
@@ -64,10 +65,11 @@ export default function MarxCritiqueHegelStudy() {
             <h1>Marx<em>crítica de la dialéctica hegeliana</em></h1>
             <p className="oa-subtitle">labor · objectivatio · alienatio · natura · realitas</p>
             <p className="oaf-lead">
-              Dossier programático construido desde la transcripción completa de
+              Dossier de estudio documentado a partir de la lectura íntegra de
               las pp. 182–208 de los <em>Manuscritos económico-filosóficos de 1844</em>.
-              No registra una clase nueva: documenta el siguiente umbral oficial
-              de Ontología II desde la fuente ya conservada en el vault.
+              Este dossier nació como umbral textual. La lectura enviada por el
+              profesor el 19 de octubre se integra más abajo como apartado distinto,
+              sin confundir la obra de Marx con los comentarios de Bloch y Fromm.
             </p>
             <div className="oa-question">
               <small>QUAESTIO</small>
@@ -153,6 +155,8 @@ export default function MarxCritiqueHegelStudy() {
           <div className="oa-schema-card"><AnimatedConceptSchema schema={atlasSchema} /></div>
         </section>
 
+        <MarxHegelAssignedAtlas />
+
         <section className="marx-hegel-lab">
           <header>
             <small>COLLECTIO · VI MOTUS</small>
@@ -219,6 +223,7 @@ export default function MarxCritiqueHegelStudy() {
             <p>Este dossier pertenece al Marx de los <em>Manuscritos de 1844</em> y su crítica de Hegel. El sistema 2D de mercancía y valor trabaja <em>El capital</em> y permanece intacto como pieza independiente.</p>
           </div>
           <div className="marx-hegel-related-actions">
+            <Link to="/tareas/ontologia-ii/marx-hegel-bloch-feuerbach/sistema"><strong>Marx · Bloch · Feuerbach · sistema 2D independiente</strong><span>74 folios · tres textos completos · guía y relaciones</span><b>↗</b></Link>
             <Link to="/estudios/ontologia-ii/hegel-ciencia-logica-ser-nada-devenir"><strong>Hegel · ser, nada y devenir</strong><span>umbral anterior de Ontología II</span><b>↗</b></Link>
             <Link to="/tareas/teoria-critica/marx-capital-fetichismo-parte-i"><strong>Marx · mercancía y valor · sistema 2D</strong><span>material relacionado · sin modificaciones</span><b>↗</b></Link>
           </div>

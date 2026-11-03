@@ -1015,3 +1015,182 @@
   color:#fff7ed;
   cursor:pointer;
 }
+
+/* PHILOSOPHIA 2D · cromática de Hacker (piloto Marx).
+   The phase determines the accent; node state (guided, selected, critical)
+   is still governed by the original Marx contract. */
+.marx-flow-node[data-topic-tone] {
+  background: var(--ph2d-node-surface);
+  background: linear-gradient(145deg,
+    color-mix(in srgb, var(--ph2d-node-accent) 13%, var(--ph2d-node-surface)) 0%,
+    var(--ph2d-node-surface) 76%);
+}
+.marx-flow-node[data-topic-tone]::before {
+  position: absolute;
+  inset: 0 0 auto;
+  height: 5px;
+  background: var(--ph2d-node-accent);
+  content: '';
+  pointer-events: none;
+}
+.marx-flow-node[data-topic-tone] .marx-flow-meta {
+  align-items: center;
+  gap: .5rem;
+}
+.marx-flow-node[data-topic-tone] .marx-flow-meta b {
+  background: var(--ph2d-node-surface);
+  background: color-mix(in srgb, var(--ph2d-node-accent) 23%, var(--ph2d-node-surface));
+  border: 1px solid var(--ph2d-node-accent);
+  color: var(--ph2d-ink);
+  padding: .27rem .37rem;
+  font-weight: 800;
+  border-radius: 2px;
+}
+.marx-flow-node.is-critical[data-topic-tone] {
+  background:
+    radial-gradient(circle at 50% 0%, rgba(var(--ph2d-red-rgb),.08), transparent 72%),
+    var(--ph2d-node-surface);
+  border: 3px double rgba(var(--ph2d-red-rgb),.72);
+}
+.marx-flow-node.is-micro[data-topic-tone] {
+  background:
+    linear-gradient(145deg, color-mix(in srgb, var(--ph2d-node-accent) 10%, var(--ph2d-node-surface)), var(--ph2d-node-surface) 75%);
+}
+/* Do not dim selected nodes even when a source route highlights neighbors. */
+.marx-flow-node.is-selected[data-topic-tone],
+.marx-flow-node.is-guided-current[data-topic-tone] {
+  opacity: 1 !important;
+  filter: none !important;
+}
+@media (prefers-reduced-motion: reduce) {
+  .marx-flow-node[data-topic-tone] { transition: none; }
+}
+
+/* Hacker's gold means selection; green guide current remains stronger and
+   the critical double border remains a separately labeled semantic state. */
+.marx-flow-node.is-selected[data-topic-tone] {
+  border-color: var(--ph2d-topic-gold);
+  box-shadow:
+    inset 0 0 0 3px var(--ph2d-topic-gold),
+    0 17px 35px rgba(var(--ph2d-shadow-rgb), .15);
+}
+
+
+/* PHILOSOPHIA · LUKÁCS · RUTAS RELACIONES II */
+.lukacs-relation-study-routes{
+  max-width:1560px;
+  margin:0 auto;
+  padding:1.25rem 3rem 1.55rem;
+  border-top:1px solid rgba(122,90,140,.18);
+  border-bottom:1px solid rgba(122,90,140,.22);
+  background:linear-gradient(90deg,rgba(122,90,140,.045),rgba(var(--ph2d-gold-rgb),.025));
+}
+.lukacs-relation-study-routes>header{
+  display:grid;
+  grid-template-columns:auto minmax(0,1fr);
+  gap:.2rem 1rem;
+  align-items:end;
+}
+.lukacs-relation-study-routes>header>span{
+  grid-row:1/3;
+  align-self:start;
+  padding:.34rem .5rem;
+  border:1px solid rgba(122,90,140,.28);
+  color:var(--ph2d-purple-dark);
+  font-size:.55rem;
+  font-weight:800;
+  letter-spacing:.13em;
+}
+.lukacs-relation-study-routes>header>strong{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.55rem;
+  font-weight:600;
+}
+.lukacs-relation-study-routes>header>p{
+  margin:0;
+  color:var(--mx-muted);
+  font-size:.76rem;
+  line-height:1.5;
+}
+.lukacs-relation-route-buttons{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:.55rem;
+  margin-top:1rem;
+}
+.lukacs-relation-route-buttons button{
+  display:grid;
+  gap:.28rem;
+  min-height:72px;
+  padding:.72rem .8rem;
+  border:1px solid rgba(122,90,140,.28);
+  background:rgba(var(--ph2d-paper-rgb),.66);
+  color:var(--mx-ink);
+  text-align:left;
+  cursor:pointer;
+}
+.lukacs-relation-route-buttons button:hover,
+.lukacs-relation-route-buttons button.is-active{
+  border-color:var(--ph2d-purple);
+  background:rgba(122,90,140,.095);
+}
+.lukacs-relation-route-buttons button.is-active{
+  box-shadow:inset 4px 0 0 var(--ph2d-purple);
+}
+.lukacs-relation-route-buttons b{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.03rem;
+  font-weight:700;
+}
+.lukacs-relation-route-buttons small{
+  color:var(--mx-muted);
+  font-size:.56rem;
+  line-height:1.35;
+}
+.lukacs-relation-route-active{
+  display:grid;
+  grid-template-columns:1.15fr .85fr;
+  gap:1px;
+  margin-top:.8rem;
+  border:1px solid rgba(122,90,140,.24);
+  background:rgba(122,90,140,.24);
+}
+.lukacs-relation-route-active>div,
+.lukacs-relation-route-active>aside{
+  padding:.9rem 1rem;
+  background:var(--mx-paper);
+}
+.lukacs-relation-route-active span{
+  color:var(--ph2d-purple-dark);
+  font-size:.55rem;
+  font-weight:800;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+}
+.lukacs-relation-route-active strong{
+  display:block;
+  margin:.3rem 0;
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.16rem;
+  font-weight:650;
+}
+.lukacs-relation-route-active p{
+  margin:.3rem 0 0;
+  color:var(--mx-muted);
+  font-size:.72rem;
+  line-height:1.48;
+}
+.lukacs-relation-route-active aside{
+  border-left:3px solid var(--ph2d-purple);
+}
+@media(max-width:980px){
+  .lukacs-relation-route-buttons{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:780px){
+  .lukacs-relation-study-routes{padding:1rem}
+  .lukacs-relation-study-routes>header{grid-template-columns:1fr}
+  .lukacs-relation-study-routes>header>span{grid-row:auto;width:max-content}
+  .lukacs-relation-route-buttons{grid-template-columns:1fr}
+  .lukacs-relation-route-active{grid-template-columns:1fr}
+  .lukacs-relation-route-active aside{border-left:0;border-top:3px solid var(--ph2d-purple)}
+}

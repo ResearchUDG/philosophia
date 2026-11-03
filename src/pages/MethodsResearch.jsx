@@ -270,6 +270,63 @@ export default function MethodsResearch() {
           </div>
           <div className="methods-enter"><span>Abrir folio</span><b>↗</b></div>
         </Link>
+        <Link to="/semestre/5/metodos-de-investigacion/clase/19-octubre" className="methods-class-card">
+          <div className="methods-date"><strong>XIX</strong><span>X · MMXXVI</span></div>
+          <div className="methods-class-copy">
+            <span>Fenomenología · miedo y amistad adolescente</span>
+            <h3>El miedo, la amistad y el mundo vivido</h3>
+            <p>Problema y objetivos; epojé, reducción eidética, variación, grupos de discusión, solidaridad y amistad en la era digital. Sistema 2D con folios y modo de estudio.</p>
+          </div>
+          <div className="methods-enter"><span>Abrir folio</span><b>↗</b></div>
+        </Link>
+        <Link to="/semestre/5/metodos-de-investigacion/clase/21-octubre" className="methods-class-card">
+          <div className="methods-date"><strong>XXI</strong><span>X · MMXXVI</span></div>
+          <div className="methods-class-copy">
+            <span>Fenomenología · entrevista y reducción</span>
+            <h3>Noesis, noema y protocolo del miedo digital</h3>
+            <p>Descripción natural, cuerpo–espacio–tiempo, amenazas en pantalla, epojé y tres variaciones eidéticas. Atlas 2D de 17 nodos, guías, estudio y folios «En palabras simples».</p>
+          </div>
+          <div className="methods-enter"><span>Abrir folio</span><b>↗</b></div>
+        </Link>
+        <Link
+          to="/biblioteca?obra=Brentano%20-%20Psicolog%C3%ADa%20desde%20el%20punto%20de%20vista%20emp%C3%ADrico"
+          className="methods-class-card"
+          aria-label="Abrir recomendación bibliográfica de Franz Brentano del 26 de octubre"
+        >
+          <div className="methods-date"><strong>XXVI</strong><span>X · MMXXVI</span></div>
+          <div className="methods-class-copy">
+            <span>Registro parcial · Recomendación bibliográfica</span>
+            <h3>Franz Brentano · Psicología desde el punto de vista empírico</h3>
+            <p>Recomendación comunicada en la sesión del 26 de octubre. Ediciones Sígueme, 2020;
+              traducción de Sergio Sánchez-Migallón. El enlace disponible es una vista previa editorial
+              de 17 páginas. No consta lectura obligatoria ni el resto del contenido de la sesión.</p>
+          </div>
+          <div className="methods-enter"><span>Abrir ficha</span><b>↗</b></div>
+        </Link>
+        <Link to="/semestre/5/metodos-de-investigacion/clase/26-octubre" className="methods-class-card">
+          <div className="methods-date"><strong>XXVI</strong><span>X · MMXXVI</span></div>
+          <div className="methods-class-copy">
+            <span>Investigación cualitativa · Fenomenología · Exposición</span>
+            <h3>De los enfoques de investigación a la experiencia vivida</h3>
+            <p>Cuantitativo, cualitativo y mixto; Brentano, Husserl, Heidegger y Schütz;
+              problema de la creencia en Villoro y compromiso de exponer las tres dialécticas.
+              Incluye esquema SVG original y nota de calendario.</p>
+          </div>
+          <div className="methods-enter"><span>Abrir folio</span><b>↗</b></div>
+        </Link>
+        <Link to="/semestre/5/metodos-de-investigacion/clase/28-octubre" className="methods-class-card">
+          <div className="methods-date"><strong>XXVIII</strong><span>X · MMXXVI</span></div>
+          <div className="methods-class-copy">
+            <span>Exposición del estudiante · Fenomenología aplicada</span>
+            <h3>Fenomenología como método de investigación filosófica</h3>
+            <p>
+              Exposición impartida por el estudiante: experiencia vivida, intencionalidad, epojé,
+              noesis/noema, horizontes y variación eidética; aplicación completa al caso de estar
+              perdido en una ciudad desconocida mediante un sistema 2D de 18 nodos.
+            </p>
+          </div>
+          <div className="methods-enter"><span>Abrir clase</span><b>↗</b></div>
+        </Link>
       </section>
 
       <footer className="methods-footer">

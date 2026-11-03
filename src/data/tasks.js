@@ -1,5 +1,36 @@
 export const tasks = [
   {
+    id: 'etica-2026-10-27-ejemplo-estoicismo',
+    subject: 'Ética',
+    subjectCode: 'FI194',
+    assignedDate: '2026-10-27',
+    dueDate: null,
+    title: 'Desarrollar un ejemplo de estoicismo griego temprano',
+    type: 'Ejercicio filosófico',
+    weight: null,
+    description: 'Relacionar fundamentos físicos y metafísicos del estoicismo con un ejemplo moral. El profesor no indicó una fecha límite inequívoca.',
+    sourceClass: 'Clase del 27 de octubre de 2026',
+    sourceRoute: '/semestre/5/etica/clase/27-octubre',
+    studyRoute: '/semestre/5/etica/clase/27-octubre',
+  },
+  {
+    id: 'metodos-2026-10-26-exposicion-tres-dialecticas',
+    subject: 'Métodos de Investigación',
+    subjectCode: 'FI104',
+    assignedDate: '2026-10-26',
+    dueDate: '2026-11-04',
+    title: 'Exponer dialéctica socrático-platónica, hegeliana y marxista',
+    type: 'Exposición oral · preparación personal',
+    weight: null,
+    description:
+      'El estudiante asume la exposición del método dialéctico en Sócrates/Platón, Hegel y Marx. El 4 de noviembre es una META PERSONAL TENTATIVA para seguimiento, NO fecha oficial confirmada: el profesor comentó que no habrá sesión el lunes 2 y que el orden de las exposiciones puede cambiar. No se indicó duración, diapositivas obligatorias, bibliografía mínima ni rúbrica.',
+    readingScope:
+      'Tres formas de dialéctica: Sócrates y Platón; Hegel; Marx. Preparar comparación, método, propósito y ejemplo de cada una.',
+    sourceClass: 'Clase del 26 de octubre · compromiso de exposición confirmado por el estudiante',
+    sourceRoute: '/semestre/5/metodos-de-investigacion/clase/26-octubre',
+    studyRoute: '/semestre/5/metodos-de-investigacion/clase/26-octubre',
+  },
+  {
     id: 'ontologia-2026-08-17-trabajo-final',
     subject: 'Ontología II',
     subjectCode: 'FI190',
@@ -9,8 +40,8 @@ export const tasks = [
     type: 'Trabajo del curso',
     weight: null,
     description:
-      'Elegir una pregunta vinculada con un tema del curso, confrontar posiciones de autores y argumentar una postura propia.',
-    sourceClass: 'Clase del 17 de agosto',
+      'Elegir una pregunta vinculada con un tema del curso, confrontar posiciones de autores y argumentar una postura propia. La sesión inicial no fija una fecha de entrega; se conserva como trabajo del curso sin vencimiento confirmado.',
+    sourceClass: 'Clase del 17 de agosto · trabajo del curso sin fecha confirmada',
     sourceRoute: '/semestre/5/ontologia-ii/clase/17-agosto',
   },
   {
@@ -23,8 +54,8 @@ export const tasks = [
     type: 'Producto final',
     weight: '40 %',
     description:
-      'Construir un protocolo que sintetice lógicamente la futura investigación: problema, antecedentes, fuentes, método, estructura y argumentación.',
-    sourceClass: 'Clase del 17 de agosto',
+      'Construir un protocolo que sintetice lógicamente la futura investigación: problema, antecedentes, fuentes, método, estructura y argumentación. La clase lo define como producto final del 40 %, pero no documenta una fecha de entrega.',
+    sourceClass: 'Clase del 17 de agosto · producto final 40 % sin fecha confirmada',
     sourceRoute:
       '/semestre/5/metodos-de-investigacion/clase/17-agosto',
   },
@@ -33,12 +64,13 @@ export const tasks = [
     subject: 'Ontología II',
     subjectCode: 'FI190',
     assignedDate: '2026-08-17',
-    dueDate: null,
+    dueDate: '2026-08-19',
     title: 'Leer el Discurso del método',
     type: 'Lectura',
     weight: null,
+    completed: true,
     description:
-      'Leer por lo menos 15 páginas del Discurso del método de René Descartes.',
+      'Leer por lo menos 15 páginas del Discurso del método de René Descartes. Fecha histórica: primera semana del curso; entrega confirmada como realizada por el estudiante.',
     sourceClass: 'Clase del 17 de agosto',
     sourceRoute: '/semestre/5/ontologia-ii/clase/17-agosto',
   },
@@ -164,6 +196,49 @@ export const tasks = [
     sourceClass: 'Clase del 19 de agosto',
     sourceRoute:
       '/semestre/5/filosofia-analitica/clase/19-agosto',
+    studyRoute: '/semestre/5/filosofia-analitica/lectura/glock-capitulo-2',
+  },
+  {
+    id: 'analitica-2026-10-21-glock-pp46-51-2d',
+    subject: 'Filosofía Analítica',
+    subjectCode: 'FI264',
+    assignedDate: '2026-10-21',
+    dueDate: '2026-10-28',
+    title: 'Glock · estudiar las páginas 46–51 en el sistema 2D',
+    type: 'Estudio guiado · lectura',
+    weight: null,
+    description:
+      'Continuar el estudio del capítulo II de Hans-Johann Glock con los 18 nodos añadidos (G21–G38): fundamentos de la matemática, Bolzano, Boole, Frege, paradoja de Russell, Gödel e inicio de «La rebelión contra el idealismo». El 26 de octubre el estudiante confirmó que este seguimiento continúa hasta la siguiente clase, miércoles 28 de octubre. Es una fecha de estudio/seguimiento, no una nueva entrega docente documentada.',
+    readingScope:
+      'Hans-Johann Glock · ¿Qué es la filosofía analítica? · capítulo II, «Breve panorama histórico»',
+    readingPages: 'pp. 46–51 · 18 nodos nuevos (G21–G38)',
+    readingEdition:
+      'Hans-Johann Glock · ¿Qué es la filosofía analítica? · Tecnos, 2012',
+    readingFullPart:
+      'La sección «Primeros vislumbres: matemática y lógica» comienza en la p. 46; «La rebelión contra el idealismo» comienza en la p. 51. Las pp. 52–86 aún no se han documentado en el sistema.',
+    sourceClass: 'Estudio personal registrado el 21 de octubre · continuidad para la clase del 28 de octubre',
+    sourceRoute: '/semestre/5/filosofia-analitica',
+    studyRoute: '/semestre/5/filosofia-analitica/lectura/glock-capitulo-2',
+  },
+
+  {
+    id: 'analitica-2026-10-26-glock-continuar-lectura',
+    subject: 'Filosofía Analítica',
+    subjectCode: 'FI264',
+    assignedDate: '2026-10-26',
+    dueDate: '2026-10-26',
+    completed: true,
+    title: 'Glock · seguir leyendo hoy',
+    type: 'Estudio del día · lectura',
+    weight: null,
+    description:
+      'Seguir leyendo hoy el capítulo II de Hans-Johann Glock desde el punto alcanzado. No se fija un rango final de páginas porque sólo se confirmó la continuidad de la lectura para hoy. Este checkpoint no sustituye el objetivo de seguimiento del miércoles 28 de octubre.',
+    readingScope:
+      'Hans-Johann Glock · ¿Qué es la filosofía analítica? · capítulo II, «Breve panorama histórico»',
+    sourceClass:
+      'Seguimiento personal confirmado por el estudiante · 26 de octubre de 2026',
+    sourceRoute: '/semestre/5/filosofia-analitica',
+    studyRoute: '/semestre/5/filosofia-analitica/lectura/glock-capitulo-2',
   },
   {
     id: 'ontologia-2026-08-24-leibniz',
@@ -392,7 +467,7 @@ export const tasks = [
     subject: 'Ontología II',
     subjectCode: 'FI190',
     assignedDate: '2026-09-14',
-    dueDate: null,
+    dueDate: '2026-09-14',
     title: 'Kant · Crítica de la razón pura · Estética trascendental',
     type: 'Estudio',
     weight: null,
@@ -401,8 +476,8 @@ export const tasks = [
     readingScope:
       'Immanuel Kant · Crítica de la razón pura · Estética trascendental · §§1–8 y conclusión',
     readingPages: 'Ribas · pp. 42–61',
-    sourceClass: 'Estudio de la Estética trascendental',
-    sourceRoute: '/semestre/5/ontologia-ii',
+    sourceClass: 'Lectura para la clase del 14 de septiembre · Estética trascendental',
+    sourceRoute: '/semestre/5/ontologia-ii/clase/14-septiembre',
     studyRoute:
       '/tareas/ontologia-ii/kant-critica-razon-pura-estetica-trascendental',
   },
@@ -535,12 +610,14 @@ export const tasks = [
     subject: 'Filosofía Analítica',
     subjectCode: 'FI264',
     assignedDate: '2026-09-21',
-    dueDate: '2026-09-28',
+    // Fecha corregida con la confirmación del usuario del 14 de octubre.
+    // El ID histórico se conserva para no perder estados de la tarea.
+    dueDate: '2026-10-19',
     title: 'Segundo reporte · Peter M. S. Hacker',
     type: 'Reporte de lectura',
     weight: null,
     description:
-      'Preparar el segundo reporte sobre “El surgimiento de la filosofía analítica del siglo XX”, de Peter M. S. Hacker. El sistema total organiza los 53 puntos principales de la sistematización, relaciones históricas y conceptuales, ejemplos propios y citas suministradas.',
+      'Entregar en la próxima clase, lunes 19 de octubre de 2026, el segundo reporte sobre “El surgimiento de la filosofía analítica del siglo XX”, de Peter M. S. Hacker. Filosofía Analítica se reúne de 19:00 a 20:25; no hay una hora límite más precisa indicada. La entrega se confirmó el 14 de octubre.',
     readingScope:
       'Peter M. S. Hacker · “El surgimiento de la filosofía analítica del siglo XX”',
     readingPages: 'pp. 95–132',
@@ -599,6 +676,80 @@ export const tasks = [
 
 
   {
+    id: 'teoria-critica-2026-10-22-freud-malestar',
+    subject: 'Teoría Crítica',
+    subjectCode: 'FI265',
+    assignedDate: '2026-10-20',
+    dueDate: '2026-10-22',
+    title: 'Freud · Lectura de hoy: El malestar en la cultura',
+    type: 'Lectura para clase virtual',
+    weight: null,
+    priority: 'Alta',
+    description: 'Lectura para hoy jueves 22 de octubre: comenzar El malestar en la cultura, de Freud. PDF disponible de 90 páginas, trad. Luis López Ballesteros (Biblioteca Libre OMEGALFA). La docente no asignó páginas ni entrega escrita. Sesión virtual: liga pendiente.',
+    readingScope: 'Sigmund Freud · El malestar en la cultura',
+    readingPages: '90 páginas del PDF de trabajo; avance o páginas obligatorias sin indicar',
+    readingEdition: 'Biblioteca Libre OMEGALFA · trad. Luis López Ballesteros · maquetación 2010',
+    sourceClass: 'Clase del martes 20 de octubre',
+    sourceRoute: '/semestre/5/teoria-critica/clase/20-octubre',
+    studyRoute: '/semestre/5/teoria-critica/clase/20-octubre',
+  },
+
+  {
+    id: 'teoria-critica-2026-10-22-freud-continuar-malestar',
+    subject: 'Teoría Crítica',
+    subjectCode: 'FI265',
+    assignedDate: '2026-10-22',
+    dueDate: '2026-10-27',
+    title: 'Freud · seguir leyendo El malestar en la cultura',
+    type: 'Continuidad de lectura',
+    weight: null,
+    priority: 'Alta',
+    description: 'Continuar la lectura de El malestar en la cultura después de la clase del 22 de octubre. El estudiante fijó el martes 27 de octubre como meta personal de lectura, no como fecha límite docente; después confirmó que ese día no hubo sesión de Teoría Crítica. En la clase del 29 reportó haber leído el capítulo I completo y haber avanzado un poco más, sin afirmar lectura total de la obra.',
+    readingScope: 'Sigmund Freud · El malestar en la cultura · continuidad de la lectura',
+    readingPages: 'Sin rango nuevo indicado en clase',
+    readingEdition: 'Biblioteca Libre OMEGALFA · trad. Luis López Ballesteros · maquetación 2010',
+    sourceClass: 'Clase del jueves 22 de octubre · continuidad de lectura sin fecha confirmada',
+    sourceRoute: '/semestre/5/teoria-critica/clase/22-octubre',
+    studyRoute: '/semestre/5/teoria-critica/clase/22-octubre',
+  },
+
+
+  {
+    id: 'teoria-critica-2026-11-03-freud-cierre',
+    subject: 'Teoría Crítica',
+    subjectCode: 'FI265',
+    assignedDate: '2026-10-29',
+    dueDate: '2026-11-03',
+    title: 'Freud · continuar El malestar en la cultura para cerrar la discusión',
+    type: 'Continuidad de lectura',
+    weight: null,
+    priority: 'Alta',
+    description: 'Continuar El malestar en la cultura para la sesión del martes 3 de noviembre, en la que la profesora anunció que se cerrará este bloque. La formulación final confirma la continuidad de la lectura, pero no fija un rango de páginas, capítulo obligatorio ni producto escrito; se publica únicamente lo que quedó confirmado.',
+    readingScope: 'Sigmund Freud · El malestar en la cultura · continuar la lectura para cerrar el bloque',
+    readingPages: 'Sin un rango de páginas confirmado en la sesión del 29 de octubre',
+    readingEdition: 'Biblioteca Libre OMEGALFA · trad. Luis López Ballesteros · maquetación 2010',
+    sourceClass: 'Clase del jueves 29 de octubre · continuidad para el martes 3 de noviembre',
+    sourceRoute: '/semestre/5/teoria-critica/clase/29-octubre',
+    studyRoute: '/semestre/5/teoria-critica/clase/29-octubre',
+  },
+
+  {
+    id: 'teoria-critica-2026-11-05-examen',
+    subject: 'Teoría Crítica',
+    subjectCode: 'FI265',
+    assignedDate: '2026-10-29',
+    dueDate: '2026-11-05',
+    title: 'Examen de Teoría Crítica',
+    type: 'Examen',
+    weight: null,
+    priority: 'Alta',
+    description: 'La profesora confirmó al cierre de la clase del 29 de octubre que el examen será el jueves 5 de noviembre. El temario, formato, duración, hora exacta y materiales permitidos no quedaron confirmados en la fuente, por lo que no se inventan.',
+    sourceClass: 'Clase del jueves 29 de octubre · examen confirmado para el jueves 5 de noviembre',
+    sourceRoute: '/semestre/5/teoria-critica/clase/29-octubre',
+    studyRoute: '/semestre/5/teoria-critica/clase/29-octubre',
+  },
+
+  {
     id: 'ontologia-2026-10-14-croce-dialectica',
     subject: 'Ontología II',
     subjectCode: 'FI190',
@@ -631,10 +782,10 @@ export const tasks = [
     weight: null,
     priority: 'Media',
     description:
-      'Continuar el bloque Croce/Hegel. La grabación parece remitir al capítulo II de Croce y el cuestionario adjunto contiene una segunda sección de 17 preguntas, pero no se recupera una fecha de entrega ni una orden inequívoca de entregarlo en la siguiente sesión.',
+      'Continuar el bloque Croce/Hegel. La documentación de la sesión remite de forma probable al capítulo II de Croce y el cuestionario adjunto contiene una segunda sección de 17 preguntas, pero no consta una fecha de entrega ni una orden inequívoca de entregarlo en la siguiente sesión. La clase del 19 de octubre tampoco registra una entrega de este bloque.',
     readingScope:
       'Benedetto Croce · capítulo II · Aclaraciones concernientes a la historia de la Dialéctica · cuestionario de 17 preguntas',
-    sourceClass: 'Clase del 14 de octubre · continuidad anunciada, sin fecha de entrega confirmada',
+    sourceClass: 'Clase del 14 de octubre · continuidad anunciada; revisión del 19 de octubre sin entrega registrada',
     sourceRoute: '/semestre/5/ontologia-ii/clase/14-octubre',
     studyRoute: '/tareas/ontologia-ii/hegel-croce-dialectica',
   },
@@ -664,7 +815,7 @@ export const tasks = [
     subject: 'Ética · Escuelas clásicas',
     subjectCode: 'FI194',
     assignedDate: '2026-10-08',
-    dueDate: null,
+    dueDate: '2026-10-13',
     title: 'Dos argumentos formales reducibles al absurdo',
     type: 'Argumentación formal',
     weight: null,
@@ -673,10 +824,83 @@ export const tasks = [
       'Construir dos argumentos formales que puedan ser trabajados mediante reducción al absurdo: formular una regla o afirmación, derivar una consecuencia, introducir un caso contrario posible y mostrar la contradicción que obliga a revisar una premisa, generalización o concepto.',
     readingScope:
       'Dialéctica socrática · reducción al absurdo · afirmación universal · contraejemplo · contradicción',
-    sourceClass: 'Clase del 8 de octubre · fecha de entrega no recuperada',
-    sourceRoute: '/semestre/5/etica',
+    sourceClass: 'Clase del 8 de octubre · entrega en la siguiente clase, martes 13 de octubre',
+    sourceRoute: '/semestre/5/etica/clase/8-octubre',
   },
 
+
+  {
+    id: 'ontologia-2026-10-18-hegel-77-98',
+    subject: 'Ontología II',
+    subjectCode: 'FI190',
+    assignedDate: '2026-10-18',
+    dueDate: '2026-10-19',
+    title: 'Hegel · Ciencia de la lógica · páginas 77–98',
+    type: 'Lectura de texto primario',
+    weight: null,
+    priority: 'Alta',
+    description: 'Consigna de lectura registrada el 18 de octubre: páginas impresas 77 a 98 de la edición Mondolfo. La lectura debía estar preparada para la clase del lunes 19 de octubre, sesión en la que se trabajó el texto.',
+    readingPages: 'Ciencia de la lógica · pp. 77–98',
+    sourceClass: 'Lectura para la clase del 19 de octubre',
+    sourceRoute: '/semestre/5/ontologia-ii/clase/19-octubre',
+    studyRoute: '/tareas/ontologia-ii/hegel-croce-dialectica',
+  },
+  {
+    id: 'ontologia-2026-10-19-fromm-marx-manuscritos',
+    subject: 'Ontología II',
+    subjectCode: 'FI190',
+    assignedDate: '2026-10-19',
+    dueDate: '2026-10-28',
+    title: 'Marx frente a Hegel · Fromm, Bloch y tesis sobre Feuerbach',
+    type: 'Lectura asignada · tres textos',
+    weight: null,
+    priority: 'Alta',
+    description: 'Consigna enviada el 19 de octubre por José Alejandro Fuerte: leer el capítulo de Marx «Crítica a la dialéctica y en general a la filosofía de Hegel» en el volumen de Erich Fromm; Bloch, capítulo XIX «Marx y la dialéctica idealista»; y las once Tesis sobre Feuerbach de Marx en La ideología alemana. El correo original no fijó fecha; el 26 de octubre el estudiante confirmó que la lectura continúa y debe quedar preparada para la siguiente clase, miércoles 28 de octubre.',
+    readingScope: 'Marx (Manuscritos de 1844, crítica de Hegel) · Bloch (Sujeto-objeto, XIX) · Marx (once Tesis sobre Feuerbach)',
+    readingPages: 'PDF adjuntos: Fromm/Marx pp. 97–112; Bloch pp. 380–387; La ideología alemana pp. 500–503',
+    readingEdition: 'PDF Fromm FCE, primera edición española 1962; Bloch FCE, segunda edición española 1983; Marx y Engels, Akal 2014. La obra de Fromm incluye el texto primario de Marx.',
+    sourceClass: 'Correo del profesor · 19 de octubre · continuidad de estudio para la clase del 28 de octubre',
+    sourceRoute: '/semestre/5/ontologia-ii/clase/19-octubre',
+    studyRoute: '/tareas/ontologia-ii/marx-hegel-bloch-feuerbach/sistema',
+  },
+
+  {
+    id: 'ontologia-2026-11-03-kolakowski-positivismo',
+    subject: 'Ontología II',
+    subjectCode: 'FI190',
+    assignedDate: '2026-11-01',
+    dueDate: '2026-11-03',
+    title: 'Kołakowski · Introducción a la filosofía positivista',
+    type: 'Lectura y sistematización',
+    weight: null,
+    priority: 'Alta',
+    description:
+      'El correo del profesor solicita leer la Introducción de La filosofía positivista para la clase del miércoles 4 de noviembre de 2026. El estudiante fija el martes 3 de noviembre como fecha de entrega/objetivo en PHILOSOPHIA. La página de estudio reconstruye el capítulo «Características generales del positivismo» del PDF aportado, pp. impresas 13–23, sin confundir esa fecha personal con la indicación docente.',
+    readingScope:
+      'Leszek Kołakowski · La filosofía positivista · capítulo I: Características generales del positivismo',
+    readingPages: 'pp. impresas 13–23 del PDF aportado para Ontología II',
+    sourceClass:
+      'Correo del profesor · lectura para miércoles 4 de noviembre; fecha de organización del martes 3 confirmada por el estudiante el 1 de noviembre',
+    studyRoute: '/tareas/ontologia-ii/kolakowski-positivismo',
+  },
+
+  {
+    id: 'ontologia-2026-10-30-examen-diez-preguntas',
+    subject: 'Ontología II',
+    subjectCode: 'FI190',
+    assignedDate: '2026-10-26',
+    dueDate: '2026-10-30',
+    title: 'Examen · responder diez preguntas',
+    type: 'Examen / entrega',
+    weight: null,
+    priority: 'Alta',
+    description:
+      'Responder diez preguntas del examen en un documento Word y enviarlo por correo electrónico al profesor. Los enunciados se recibirán por correo el martes 27 de octubre de 2026 y la fecha máxima de entrega es el viernes 30 de octubre de 2026. La hora límite y la dirección de envío aún no están confirmadas.',
+    readingScope:
+      'Diez preguntas de examen · enunciados por recibir por correo el martes 27 de octubre',
+    sourceClass: 'Clase del 26 de octubre · examen de diez preguntas',
+    sourceRoute: '/semestre/5/ontologia-ii/clase/26-octubre',
+  },
 ]
 
 export default tasks

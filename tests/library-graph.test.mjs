@@ -1,0 +1,141 @@
+import test from 'node:test'
+import assert from 'node:assert/strict'
+import { readFileSync } from 'node:fs'
+import { books, authors } from '../src/data/libraryCatalog.js'
+import {
+ buildLibraryGraph,projectLibraryGraph,searchGraphNodes,
+ connectedGraphNodes,connectedGraphRelations,documentedConceptLinks,documentedConceptRelations,
+} from '../src/data/libraryGraph.js'
+
+const graph=buildLibraryGraph()
+const ids=new Set(graph.nodes.map(n=>n.id))
+const byId=new Map(graph.nodes.map(n=>[n.id,n]))
+
+test('todas las obras y autores tienen nodos únicos, sin aristas huérfanas',()=>{
+ assert.equal(graph.nodes.length,ids.size)
+ for(const book of books)assert.ok(ids.has('obra:'+book.id),book.id)
+ for(const author of authors)assert.ok(ids.has('autor:'+author),author)
+ assert.equal(graph.edges.length,new Set(graph.edges.map(e=>e.id)).size)
+ for(const edge of graph.edges){
+   assert.ok(ids.has(edge.source),'origen sin nodo')
+   assert.ok(ids.has(edge.target),'destino sin nodo')
+   assert.ok(edge.evidence&&edge.relation,'falta evidencia de relación')
+ }
+})
+
+test('conceptos en el mapa sólo provienen de enlaces en fichas revisadas',()=>{
+ const conceptNames=[...new Set([
+   ...Object.values(documentedConceptLinks).flat(),
+   ...Object.keys(documentedConceptRelations),
+   ...Object.values(documentedConceptRelations).flat(),
+ ])]
+ assert.equal(graph.nodes.filter(n=>n.kind==='concepto').length,conceptNames.length)
+ assert.ok(Object.keys(documentedConceptLinks).length>=28)
+ assert.ok(Object.keys(documentedConceptRelations).length>=13)
+ for(const [work,items] of Object.entries(documentedConceptLinks)){
+   for(const term of items)
+     assert.ok(graph.edges.some(e=>e.source==='obra:'+work &&
+       e.target==='concepto:'+term && e.relation==='ficha_enlaza_concepto'))
+ }
+ for(const [source,items] of Object.entries(documentedConceptRelations))
+   for(const target of items)
+     assert.ok(graph.edges.some(e=>e.source==='concepto:'+source
+       &&e.target==='concepto:'+target&&e.relation==='ficha_concepto_enlaza_otro'))
+ assert.ok(connectedGraphRelations(graph,'concepto:Cosificación (Lukács)')
+   .some(e=>e.other.label==='Mercancía (Marx)'&&e.evidence.includes('ficha')))
+ assert.ok(!graph.edges.some(e=>e.relation==='dialoga_con'))
+})
+
+test('vista focal: un máximo de 34 nodos, sin posiciones superpuestas',()=>{
+ const focus=projectLibraryGraph(graph)
+ assert.ok(focus.nodes.length>=3&&focus.nodes.length<=34)
+ assert.ok(focus.nodes.some(n=>n.isCenter))
+ const points=focus.nodes.map(n=>n.position.x+':'+n.position.y)
+ assert.equal(new Set(points).size,points.length)
+ const restricted=projectLibraryGraph(graph,{concepts:false,classes:false,activities:false})
+ assert.ok(restricted.nodes.every(n=>['autor','obra'].includes(n.kind)))
+})
+
+test('vista general: autores, obras y conceptos sin atribuir tareas a libros',()=>{
+ const view=projectLibraryGraph(graph,{mode:'general'})
+ assert.ok(view.nodes.length>=books.length+authors.length)
+ const show=new Set(view.nodes.map(n=>n.id))
+ assert.ok(view.nodes.every(n=>['autor','obra','concepto'].includes(n.kind)))
+ assert.ok(view.edges.every(e=>show.has(e.source)&&show.has(e.target)))
+ const coords=view.nodes.map(n=>n.position.x+':'+n.position.y)
+ assert.equal(coords.length,new Set(coords).size)
+})
+
+test('búsqueda tolerante a tildes, inspección de vínculos y rutas públicas válidas',()=>{
+ assert.ok(searchGraphNodes(graph,'cosificacion').some(n=>n.label==='Cosificación (Lukács)'))
+ assert.ok(searchGraphNodes(graph,'marx').some(n=>n.label==='Marx, Karl'))
+ assert.ok(connectedGraphNodes(graph,'obra:Platón - Cármides')
+   .some(n=>n.label==='Sophrosyne (templanza)'))
+ const app=readFileSync(new URL('../src/App.jsx',import.meta.url),'utf8')
+ const routes=new Set([...app.matchAll(/<Route\s+path="([^"]+)"/g)].map(m=>m[1]))
+ assert.ok(routes.has('/biblioteca/cartografia'))
+ for(const n of graph.nodes){
+   if(n.url)assert.ok(routes.has(n.url),'URL no publicada: '+n.url)
+   assert.ok(!('vaultPath' in n)&&!('posesion' in n))
+ }
+ assert.ok([...byId.keys()].some(x=>x.startsWith('fuente:')))
+ assert.ok(graph.edges.some(e=>e.relation==='mencionado_en_clase'))
+ assert.ok(graph.edges.some(e=>e.relation==='registrado_en_tarea'))
+})
+
+
+test('Glock: 50 conceptos canónicos con definición, página, ruta y relaciones verificables',()=>{
+ const work='Glock - Qué es la filosofía analítica - Capítulo II'
+ const names=documentedConceptLinks[work]
+ assert.equal(names.length,50)
+ assert.equal(new Set(names).size,50)
+ for(const term of names){
+  const node=byId.get('concepto:'+term)
+  assert.ok(node,'Falta nodo de concepto '+term)
+  assert.ok(node.definition?.length>65,term)
+  assert.ok(node.simple?.length>20,term)
+  assert.match(node.pages,/4[0-9]|5[01]/)
+  assert.match(node.sourceNode,/^G[0-3][0-9]$/)
+  assert.equal(node.studyUrl,'/semestre/5/filosofia-analitica/lectura/glock-capitulo-2')
+  assert.ok(graph.edges.some(e=>e.source==='obra:'+work&&e.target===node.id))
+ }
+ assert.ok(searchGraphNodes(graph,'bolzano').some(n=>n.kind==='concepto'))
+ assert.equal(byId.get('concepto:Logicismo').sourceNode,'G35')
+ const b=books.find(item=>item.id===work)
+ assert.ok(b.lectura.includes('40–51'))
+})
+
+test('Biblioteca: ficha Glock conservada sin exhibir un bloque monográfico en el índice principal',()=>{
+ const src=readFileSync(new URL('../src/pages/PhilosophiaLibrary.jsx',import.meta.url),'utf8')
+ const css=readFileSync(new URL('../src/pages/PhilosophiaLibrary.css',import.meta.url),'utf8')
+ assert.ok(src.includes('library-cartography-launch'))
+ assert.ok(src.includes('library-index'))
+ assert.ok(src.includes('Explorar cartografía 2D'))
+ assert.ok(!src.includes('library-glock-lexicon'))
+ assert.ok(!src.includes('glockResults'))
+ assert.ok(!css.includes('.library-glock-lexicon'))
+ const work='Glock - Qué es la filosofía analítica - Capítulo II'
+ assert.equal(documentedConceptLinks[work].length,50)
+ assert.ok(graph.edges.some(edge=>edge.source==='obra:'+work&&edge.target==='concepto:Logicismo'))
+ assert.ok(byId.get('concepto:Logicismo')?.definition)
+})
+
+test('Popper y falsabilidad: obra, concepto y enlace documental aparecen en búsqueda y red',()=>{
+ const work='Popper - La lógica de la investigación científica'
+ const book=books.find(b=>b.id===work)
+ assert.ok(book,'Libro de Popper ausente del catálogo')
+ assert.equal(documentedConceptLinks[work]?.length,1)
+ assert.equal(documentedConceptLinks[work][0],'Falsabilidad')
+ assert.ok(ids.has('obra:'+work),'Obra de Popper sin nodo')
+ assert.ok(ids.has('autor:Popper, Karl'),'Autor de Popper sin nodo')
+ assert.ok(ids.has('concepto:Falsabilidad'),'Falsabilidad sin nodo')
+ assert.ok(graph.edges.some(e=>e.source==='obra:'+work &&
+   e.target==='concepto:Falsabilidad' && e.relation==='ficha_enlaza_concepto'))
+ assert.ok(graph.edges.some(e=>e.source==='autor:Popper, Karl' &&
+   e.target==='obra:'+work && e.relation==='autor_de'))
+ assert.ok(searchGraphNodes(graph,'Falsa').some(n=>n.id==='concepto:Falsabilidad'))
+ assert.ok(searchGraphNodes(graph,'Popper').some(n=>n.id==='autor:Popper, Karl'))
+ assert.ok(searchGraphNodes(graph,'lógica de la investigación').some(n=>n.id==='obra:'+work))
+ assert.ok(projectLibraryGraph(graph,{centerId:'concepto:Falsabilidad'}).nodes
+   .some(n=>n.id==='obra:'+work),'No se muestra la obra al centrar falsabilidad')
+})

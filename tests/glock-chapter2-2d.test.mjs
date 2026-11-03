@@ -1,0 +1,180 @@
+import assert from 'node:assert/strict'
+import { readFileSync } from 'node:fs'
+import test from 'node:test'
+import {
+  GLOCK_GEOMETRY, glockGuidedRoute, glockLinks, glockMethodSchema,
+  glockNodeOrder, glockNodes, glockRouteTones, glockRoutes,
+} from '../src/data/glockAnalyticChapter2.js'
+import { buildSectionPedagogy } from '../src/components/philosophy/system2d/SectionPedagogyModel.js'
+import tasks from '../src/data/tasks.js'
+
+const byId = new Map(glockNodes.map((n) => [n.id, n]))
+const page = readFileSync(new URL('../src/pages/AnalyticGlockSystem.jsx', import.meta.url), 'utf8')
+const css = readFileSync(new URL('../src/pages/AnalyticGlockSystem.css', import.meta.url), 'utf8')
+const node = readFileSync(new URL('../src/components/analytic/GlockNode.jsx', import.meta.url), 'utf8')
+
+test('Glock conserva 39 nodos, fuentes y capas docentes por fecha', () => {
+  assert.equal(glockNodes.length, 39)
+  assert.deepEqual(glockNodeOrder, glockNodes.map((n) => n.id))
+  for (const n of glockNodes) {
+    assert.ok(n.data.sourcePassage?.length > 180, n.id)
+    assert.ok(n.data.diagram?.length >= 3, n.id)
+    assert.equal(n.data.schema?.direction, 'vertical', n.id)
+    if (Number(n.id.slice(1)) <= 20) {
+      assert.ok(n.data.class19Oct, n.id)
+      assert.ok(n.data.classSeen, n.id)
+    } else if (Number(n.id.slice(1)) <= 31) {
+      assert.equal(n.data.class19Oct, null, n.id)
+      assert.ok(n.data.class21Oct?.note?.length > 40, n.id)
+      assert.ok(n.data.class21Oct?.simple?.length > 15, n.id)
+      assert.equal(n.data.classSeen, true, n.id)
+    } else {
+      assert.equal(n.data.class19Oct, null, n.id)
+      assert.equal(n.data.class21Oct, null, n.id)
+      assert.equal(n.data.classSeen, false, n.id)
+    }
+    assert.ok(glockRouteTones[n.data.section], n.id)
+    assert.ok(n.data.concepts.length >= 1, n.id)
+  }
+  assert.equal(byId.get('G20').data.page, 'p. 46')
+  assert.equal(byId.get('G38').data.page, 'p. 51')
+  assert.equal(byId.get('G24').data.section, 'bolzano')
+  assert.equal(byId.get('G33').data.section, 'frege')
+  assert.ok(byId.get('G36').data.explanation.includes('Principia Mathematica'))
+})
+
+test('Glock mantiene relaciones resolubles y saca sus rótulos del canvas', () => {
+  assert.equal(glockLinks.length, 44)
+  for (const edge of glockLinks) {
+    assert.ok(byId.has(edge.source) && byId.has(edge.target), edge.id)
+    assert.ok(edge.label.trim().length >= 8, edge.id)
+  }
+  assert.match(page, /label: undefined/)
+  assert.match(page, /Relaciones documentadas/)
+})
+
+test('Trece rutas, guía global y pedagogía por sección cubren todos los nodos', () => {
+  const sections = buildSectionPedagogy(glockNodes, glockRoutes, glockNodeOrder)
+  assert.equal(sections.length, 13)
+  assert.equal(glockGuidedRoute.length, glockNodes.length)
+  assert.deepEqual(glockGuidedRoute.map((step) => step.id), glockNodeOrder)
+  sections.forEach((section) => {
+    assert.ok(section.members.length > 0, section.id)
+    assert.equal(section.questions.length, section.members.length)
+  })
+  assert.match(page, /buildGuidedRouteFor/)
+  assert.match(page, /startTopicGuide/)
+  assert.match(page, /glock-topic-guide-rail/)
+  assert.match(page, /<SectionPedagogy/)
+})
+
+test('Geometría compacta conserva pasaje y mini-esquema', () => {
+  assert.deepEqual(
+    { width: GLOCK_GEOMETRY.width, height: GLOCK_GEOMETRY.height },
+    { width: 310, height: 360 },
+  )
+  assert.ok(GLOCK_GEOMETRY.gapX >= 90 && GLOCK_GEOMETRY.gapY >= 90)
+  glockNodes.forEach((a, i) => glockNodes.slice(i + 1).forEach((b) => {
+    const overlapX = a.position.x < b.position.x + GLOCK_GEOMETRY.width + 20 &&
+      b.position.x < a.position.x + GLOCK_GEOMETRY.width + 20
+    const overlapY = a.position.y < b.position.y + GLOCK_GEOMETRY.height + 20 &&
+      b.position.y < a.position.y + GLOCK_GEOMETRY.height + 20
+    assert.ok(!(overlapX && overlapY), a.id + ' y ' + b.id)
+  }))
+  assert.match(css, /width:310px;height:360px/)
+  assert.match(css, /glock-node-source-card blockquote\{height:74px;overflow-y:auto/)
+  assert.match(node, /data\.sourcePassage/)
+  assert.match(node, /data\.diagram\.map/)
+})
+
+test('Estados Hacker/Marx conservan selección, guía y blur relacional', () => {
+  for (const state of [
+    'is-selected', 'is-highlighted', 'is-dimmed', 'is-guided-current',
+    'is-guided-next', 'is-topic-active', 'is-topic-support',
+  ]) assert.match(node, new RegExp(state))
+  assert.match(page, /selectionSetFor/)
+  assert.match(page, /node\.id !== selectedId/)
+  assert.match(css, /is-selected\{[^}]*opacity:1!important;filter:none!important/)
+  assert.match(css, /is-guided-current\{[^}]*opacity:1!important;filter:none!important/)
+})
+
+test('Inspector separa autor, clase, estudio, dependencias y conceptos', () => {
+  assert.match(page, /Qué significa/)
+  assert.match(page, /EXPLICACIÓN DOCENTE · 19 OCT 2026/)
+  assert.match(page, /EXPLICACIÓN DOCENTE · 21 OCT 2026/)
+  assert.match(page, /TEXTO ORIGINAL DE GLOCK/)
+  assert.match(page, /ESQUEMA DEL NODO · RECONSTRUCCIÓN DE ESTUDIO/)
+  assert.match(page, /PREGUNTA DE ESTUDIO/)
+  assert.match(page, /Depende de/)
+  assert.match(page, /Produce/)
+  assert.match(page, /Conceptos \/ momentos/)
+  assert.doesNotMatch(page, /grabaci[oó]n|transcripci[oó]n/i)
+})
+
+test('Selección centra nodo mostrado y no reencuadra todo el sistema', () => {
+  assert.match(page, /window\.requestAnimationFrame/)
+  assert.match(page, /thematicLayout\.get\(node\.id\) \|\| node\.position/)
+  assert.match(page, /\[selectedId, route, guidedMode, guidedIndex, thematicLayout, setCenter\]/)
+})
+
+test('iPad apila mapa e inspector; el esquema general sigue vertical', () => {
+  assert.match(css, /@media\(max-width:1180px\)/)
+  assert.match(css, /glock-study-workspace\{grid-template-columns:minmax\(0,1fr\);height:auto\}/)
+  assert.match(css, /height:clamp\(440px,56dvh,680px\)/)
+  assert.equal(glockMethodSchema.layout, 'hierarchy')
+  assert.equal(glockMethodSchema.readingLayout, 'vertical-folio')
+  assert.ok(glockMethodSchema.hierarchyYGap >= 150)
+})
+
+
+test('La tercera entrega sigue pp. 46–51, con frontera documental estricta', () => {
+  const newNodes = glockNodes.filter(n => Number(n.id.slice(1)) >= 21)
+  assert.equal(newNodes.length, 18)
+  assert.deepEqual(newNodes.map(n => n.id),
+    Array.from({ length: 18 }, (_, i) => 'G' + String(i + 21)))
+  for (const n of newNodes) {
+    assert.match(n.data.page, /(?:46|47|48|49|50|51)/)
+    assert.doesNotMatch(n.data.page, /52|fragmento/)
+    assert.equal(n.data.classSeen, Number(n.id.slice(1)) <= 31)
+    assert.equal(Boolean(n.data.class21Oct), Number(n.id.slice(1)) <= 31)
+    assert.equal(n.data.schema.nodes.length, n.data.diagram.length)
+    assert.ok(n.data.sourcePassage.length >= 180)
+  }
+  for (const id of ['matematicas','bolzano','boole','frege','limites','rebelion']) {
+    assert.ok(glockRoutes.find(route => route.id === id), id)
+  }
+  assert.match(byId.get('G38').data.explanation, /no se ha recibido/)
+  assert.ok(glockLinks.find(edge => edge.source === 'G20' && edge.target === 'G21'))
+})
+
+
+test('La tarea Glock pp. 46–51 conserva FI264 y el objetivo de estudio confirmado para el 28 de octubre', () => {
+  const matches = tasks.filter(task => task.id === 'analitica-2026-10-21-glock-pp46-51-2d')
+  assert.equal(matches.length, 1)
+  const task = matches[0]
+  assert.equal(task.subjectCode, 'FI264')
+  assert.equal(task.dueDate, '2026-10-28')
+  assert.equal(task.assignedDate, '2026-10-21')
+  assert.equal(task.studyRoute, '/semestre/5/filosofia-analitica/lectura/glock-capitulo-2')
+  assert.match(task.readingPages, /46–51/)
+  assert.match(task.description, /Bolzano, Boole, Frege/)
+  assert.match(task.description, /fecha de estudio\/seguimiento/)
+  assert.match(task.sourceClass, /continuidad para la clase del 28 de octubre/)
+  assert.ok(tasks.some(item => item.id === 'analitica-2026-08-19-glock-cap2'))
+})
+
+
+test('El checkpoint del 26 de octubre pide seguir leyendo a Glock hoy sin borrar el hito del 28', () => {
+  const today = tasks.filter(task => task.id === 'analitica-2026-10-26-glock-continuar-lectura')
+  assert.equal(today.length, 1)
+  assert.equal(today[0].subjectCode, 'FI264')
+  assert.equal(today[0].assignedDate, '2026-10-26')
+  assert.equal(today[0].dueDate, '2026-10-26')
+  assert.match(today[0].title, /seguir leyendo hoy/)
+  assert.match(today[0].description, /No se fija un rango final de páginas/)
+  assert.match(today[0].sourceClass, /Seguimiento personal confirmado/)
+  assert.equal(today[0].studyRoute, '/semestre/5/filosofia-analitica/lectura/glock-capitulo-2')
+
+  const nextClass = tasks.find(task => task.id === 'analitica-2026-10-21-glock-pp46-51-2d')
+  assert.equal(nextClass?.dueDate, '2026-10-28')
+})

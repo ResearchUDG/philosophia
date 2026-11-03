@@ -1,3 +1,5 @@
+import SectionPedagogy from '../components/philosophy/system2d/SectionPedagogy'
+import { initialSystem2DRoute, useSystem2DCompactViewport } from '../components/philosophy/system2d/mobilePerformance.js'
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { Link } from 'react-router'
 import { createPortal } from 'react-dom'
@@ -29,8 +31,48 @@ import {
   hegelCroceSource,
   hegelCroceStats,
 } from '../data/hegelCroceTaskSystem'
+import { hegelReadingSequence } from '../data/hegelLogic77to98'
 
 const nodeTypes = { text:HegelCroceNode, core:HegelCroceNode }
+
+/** Presentación del profesor, no cita primaria de la Ciencia de la lógica. */
+function HegelTeacherSlideDocument({ note, compact=false }) {
+  if (!note) return null
+  return (
+    <section className={`hegel-teacher-document ${compact ? 'is-compact' : 'is-folio'}`}>
+      <header className="hegel-teacher-document__heading">
+        <span>DOCUMENTO DOCENTE · {note.documentName || 'Ciencia de la Lógica → Comienzo'} · DIAPOSITIVA {note.slide} / {note.seriesTotal || 9}</span>
+        <h3>Texto explícito de la diapositiva</h3>
+        <small>Contenido del material del profesor · no atribuir estas formulaciones literalmente a Hegel</small>
+      </header>
+      <ol className="hegel-teacher-document__text">
+        {note.literal.map((paragraph,index)=>(
+          <li key={`${note.id}-literal-${index}`}>
+            <span aria-hidden="true">{String(index+1).padStart(2,'0')}</span>
+            <p>{paragraph}</p>
+          </li>
+        ))}
+      </ol>
+      {!compact && (
+        <div className="hegel-teacher-document__study">
+          <span>RECONSTRUCCIÓN SISTÉMICA · PHILOSOPHIA</span>
+          <p>{note.explanation}</p>
+          <h4>Movimiento conceptual de la diapositiva</h4>
+          <ol>
+            {note.steps.map((step,index)=>(
+              <li key={`${note.id}-step-${index}`}>
+                <b>{step[1]}</b> — {step[2]}
+              </li>
+            ))}
+          </ol>
+          <p className="hegel-teacher-document__boundary">El esquema siguiente interpreta las conexiones didácticas; su forma y sus relaciones no son un dibujo original del profesor.</p>
+        </div>
+      )}
+    </section>
+  )
+}
+
+
 
 function relatedSet(id, includeConceptual=false) {
   if (!id) return new Set()
@@ -49,12 +91,16 @@ function relatedSet(id, includeConceptual=false) {
 }
 
 function routeOrder(routeId) {
-  if(!routeId || routeId==='all') return []
+  if (!routeId || routeId==='all') return []
+  const readingOrder=new Map(hegelReadingSequence.map((id,index)=>[id,index]))
   return hegelCroceNodes
     .filter((node)=>node.data.branch.includes(routeId))
     .sort((a,b)=>{
       const phaseDelta=hegelCrocePhases.indexOf(a.data.phase)-hegelCrocePhases.indexOf(b.data.phase)
-      if(phaseDelta) return phaseDelta
+      if(phaseDelta)return phaseDelta
+      if(routeId==='reading77' && readingOrder.has(a.id) && readingOrder.has(b.id)){
+        return readingOrder.get(a.id)-readingOrder.get(b.id)
+      }
       return a.id.localeCompare(b.id,'es',{numeric:true})
     })
     .map((node)=>node.id)
@@ -63,7 +109,8 @@ function routeOrder(routeId) {
 function HegelCroceTaskCanvas() {
   const { setCenter, fitView, getNodes } = useReactFlow()
   const workspaceRef=useRef(null)
-  const [route,setRoute]=useState('all')
+  const [route, setRoute] = useState(() => initialSystem2DRoute(hegelCroceRoutes))
+  const compactViewport = useSystem2DCompactViewport()
   const [selectedId,setSelectedId]=useState(null)
   const [conceptualMode,setConceptualMode]=useState(false)
   const [guidedMode,setGuidedMode]=useState(false)
@@ -71,6 +118,7 @@ function HegelCroceTaskCanvas() {
   const [folioId,setFolioId]=useState(null)
   const [relationId,setRelationId]=useState(null)
   const [workspaceFullscreen,setWorkspaceFullscreen]=useState(false)
+  const [workspaceExpanded,setWorkspaceExpanded]=useState(false)
   const [history,setHistory]=useState([])
 
   const selected=hegelCroceNodeById(selectedId)
@@ -211,7 +259,13 @@ function HegelCroceTaskCanvas() {
     if(guidedMode || route==='all') return
     const timer=window.setTimeout(()=>{
       const visible=getNodes().filter((node)=>!node.hidden)
-      if(visible.length) fitView({nodes:visible,padding:.13,duration:650,maxZoom:.82})
+      if(visible.length){
+        // Una ruta con 28 tarjetas no debe iniciar a escala microscópica.
+        // Enfocar primero dos tarjetas conserva legibilidad en iPad,
+        // mientras guía, controles y minimapa permiten recorrer el resto.
+        const firstView=route==='reading77' ? visible.slice(0,2) : visible
+        fitView({nodes:firstView,padding:.18,duration:650,maxZoom:1})
+      }
     },100)
     return ()=>window.clearTimeout(timer)
   },[route,guidedMode,getNodes,fitView])
@@ -235,14 +289,30 @@ function HegelCroceTaskCanvas() {
   },[folioId,relationId])
 
   const toggleWorkspaceFullscreen=async()=>{
-    if(!document.fullscreenElement){
-      await workspaceRef.current?.requestFullscreen?.()
-    }else{
+    if(workspaceExpanded){setWorkspaceExpanded(false);return}
+    if(document.fullscreenElement){
       await document.exitFullscreen?.()
+      return
     }
+    try{
+      if(typeof workspaceRef.current?.requestFullscreen === 'function'){
+        await workspaceRef.current.requestFullscreen()
+        return
+      }
+    }catch{
+      // Safari/iPadOS y navegadores embebidos pueden rechazar el fullscreen nativo.
+    }
+    setWorkspaceExpanded(true)
   }
 
-  const overlayHost=workspaceFullscreen && workspaceRef.current ? workspaceRef.current : document.body
+  useEffect(()=>{
+    if(!workspaceExpanded) return undefined
+    const onEscape=(event)=>{if(event.key==='Escape')setWorkspaceExpanded(false)}
+    window.addEventListener('keydown',onEscape)
+    return ()=>window.removeEventListener('keydown',onEscape)
+  },[workspaceExpanded])
+
+  const overlayHost=(workspaceFullscreen || workspaceExpanded) && workspaceRef.current ? workspaceRef.current : document.body
 
   return (
     <main className="marx-study-shell hegel-task-shell">
@@ -258,7 +328,7 @@ function HegelCroceTaskCanvas() {
           <h1>Hegel · Croce <em>dialéctica, Ser, Nada y Devenir</em></h1>
           <p className="marx-study-lead">
             Un sistema de estudio construido desde los materiales enviados y ampliado con la clase del 14 de octubre:
-            Croce, cuestionario, Ciencia de la Lógica, Henrich y la explicación oral del profesor como capa separada.
+            Croce, cuestionario, Ciencia de la lógica, Henrich, la clase del 14 de octubre y una nueva lectura de las pp. 77–98 con dos presentaciones docentes diferenciadas.
           </p>
         </div>
         <aside>
@@ -281,6 +351,25 @@ function HegelCroceTaskCanvas() {
         </div>
       </section>
 
+      <section className="hegel-reading-announcement" aria-labelledby="hegel-reading-new-title">
+        <div>
+          <span>LECTURA NUEVA · 18 OCTUBRE 2026</span>
+          <h2 id="hegel-reading-new-title">Ciencia de la lógica · páginas 77–98</h2>
+          <p>
+            La consigna posterior del profesor solicita leer estas páginas de la edición Mondolfo.
+            El recorrido único intercala el texto primario y sus dos presentaciones docentes, sin
+            confundirlas con la clase del 14 de octubre ni modificar aquella entrega.
+          </p>
+          <small>21 pasajes del libro + 24 apoyos docentes de las dos presentaciones, ordenados en un único recorrido · fuentes diferenciadas por página y diapositiva</small>
+        </div>
+        <div className="hegel-reading-actions">
+          <button type="button" onClick={() => { setGuidedMode(false);setSelectedId(null);setRoute('reading77') }}>
+            Explorar lectura en el mapa →
+          </button>
+
+        </div>
+      </section>
+
       <section className="hegel-task-plan">
         <article><span>01</span><strong>Croce</strong><p>Entender el problema de los contrarios y la solución hegeliana.</p></article>
         <article><span>02</span><strong>Cuestionario</strong><p>Probar la comprensión mediante las 18 preguntas del capítulo I.</p></article>
@@ -294,7 +383,7 @@ function HegelCroceTaskCanvas() {
           <strong>Ruta guiada completa · {hegelCroceGuidedRoute.length} / {hegelCroceStats.nodes} nodos</strong>
           <p>
             La guía recorre los {hegelCroceStats.nodes} nodos sin saltarse detalles: consigna, Croce,
-            las 18 preguntas, Hegel y Henrich. El nodo actual y el siguiente permanecen visibles.
+            las 18 preguntas, Hegel, Henrich, las páginas 77–98 y las presentaciones docentes. El nodo actual y el siguiente permanecen visibles.
           </p>
         </div>
         <button
@@ -357,7 +446,7 @@ function HegelCroceTaskCanvas() {
                 setGuidedMode(false)
                 setRoute(item.id)
                 setSelectedId(null)
-                if(item.id==='all') setTimeout(()=>fitView({padding:.08,duration:500}),0)
+                if (item.id === 'all' && !compactViewport) setTimeout(()=>fitView({padding:.08,duration:500}),0)
               }}
             >
               {item.label}
@@ -381,7 +470,7 @@ function HegelCroceTaskCanvas() {
               setRoute('all')
               setSelectedId(null)
               setRelationId(null)
-              setTimeout(()=>fitView({padding:.08,duration:500}),0)
+              if(!compactViewport) setTimeout(()=>fitView({padding:.08,duration:500}),0)
             }}
           >
             Sistema completo
@@ -391,7 +480,7 @@ function HegelCroceTaskCanvas() {
 
       <section
         ref={workspaceRef}
-        className={workspaceFullscreen ? 'marx-study-workspace hegel-task-workspace is-fullscreen' : 'marx-study-workspace hegel-task-workspace'}
+        className={workspaceFullscreen ? 'marx-study-workspace hegel-task-workspace is-fullscreen' : workspaceExpanded ? 'marx-study-workspace hegel-task-workspace is-expanded' : 'marx-study-workspace hegel-task-workspace'}
       >
         <div className="marx-flow-panel">
           <div className="marx-flow-caption">
@@ -411,16 +500,17 @@ function HegelCroceTaskCanvas() {
                 className="marx-workspace-fullscreen-toggle"
                 onClick={toggleWorkspaceFullscreen}
               >
-                {workspaceFullscreen ? 'Salir ⛶' : 'Pantalla completa ⛶'}
+                {workspaceFullscreen || workspaceExpanded ? 'Cerrar vista ampliada ⛶' : 'Pantalla completa / ampliar mapa ⛶'}
               </button>
             </div>
           </div>
 
           <div className="marx-flow-canvas">
             <ReactFlow
-              nodes={nodes}
-              edges={edges}
+              nodes={compactViewport ? nodes.filter((node) => !node.hidden) : nodes}
+              edges={compactViewport ? edges.filter((edge) => !edge.hidden) : edges}
               nodeTypes={nodeTypes}
+              onlyRenderVisibleElements={compactViewport && route === 'all'}
               onNodeClick={(_,node)=>selectNode(node)}
               onEdgeClick={(event,edge)=>{
                 if(!edge.relationSheetId) return
@@ -437,13 +527,25 @@ function HegelCroceTaskCanvas() {
             >
               <Background gap={32} size={1} />
               <Controls showInteractive={false} />
-              <MiniMap pannable zoomable nodeStrokeWidth={3} />
+              {!compactViewport && <MiniMap pannable zoomable nodeStrokeWidth={3} />} 
             </ReactFlow>
           </div>
         </div>
 
         <aside className="marx-inspector">
           <div className="marx-inspector-scroll">
+          <SectionPedagogy
+            nodes={hegelCroceNodes}
+            routes={hegelCroceRoutes}
+            activeRoute={route}
+            selectedId={selectedId}
+            onSectionChange={(id) => { setGuidedMode(false); setRoute(id); setSelectedId(null) }}
+            onFocusNode={(id) => {
+              setGuidedMode(false)
+              selectById(id)
+            }}
+          />
+
             {selected ? (
               <>
                 <div className="marx-inspector-head">
@@ -458,6 +560,9 @@ function HegelCroceTaskCanvas() {
                   <blockquote>{selected.data.excerpt}</blockquote>
                   <small>{selected.data.sourceShort} · {selected.data.page}</small>
                 </section>
+                {selected.data.teacherSlide && (
+                  <HegelTeacherSlideDocument note={selected.data.teacherSlide} compact />
+                )}
 
                 <section>
                   <span>EXPLICACIÓN</span>
@@ -671,8 +776,12 @@ function HegelCroceTaskCanvas() {
                 </div>
               </section>
 
+              {folio.data.teacherSlide && (
+                <HegelTeacherSlideDocument note={folio.data.teacherSlide} />
+              )}
+
               <section className="marx-folio-schema-panel">
-                <span>ESQUEMA DEL NODO</span>
+                <span>ESQUEMA ARGUMENTAL DEL NODO</span>
                 <AnimatedConceptSchema
                   key={`hegel-croce-schema-${folio.id}`}
                   schema={folio.data.schema}

@@ -18,7 +18,8 @@ const readings = [
     number: 'III',
     author: 'Hans-Johann Glock',
     title: 'Breve panorama histórico',
-    note: '¿Qué es la filosofía analítica? · capítulo II · pp. 40–86',
+    note: '¿Qué es la filosofía analítica? · capítulo II · texto cotejado: 40–53; atlas 2D: 40–51; continuación pendiente: 54–86',
+    route: '/semestre/5/filosofia-analitica/lectura/glock-capitulo-2',
   },
   {
     number: 'IV',
@@ -37,6 +38,13 @@ const readings = [
     author: 'John Rawls',
     title: 'Justicia como equidad',
     note: 'Ejemplo de ética y filosofía política analítica',
+  },
+  {
+    number: 'VII',
+    author: 'Alonso Nava Amezcua',
+    title: 'Tecnociencia, entorno y sujeto tecnocientífico',
+    note: 'Recomendación complementaria del profesor · Eikasía, 134 (2026), 21–30 · no es tarea obligatoria',
+    route: '/semestre/5/filosofia-analitica/lectura/nava-tecnociencia',
   },
 ]
 
@@ -463,6 +471,66 @@ export default function AnalyticPhilosophy() {
           </div>
         </Link>
 
+
+        <Link to="/semestre/5/filosofia-analitica/clase/14-octubre" className="analytic-class-card">
+          <div className="analytic-date">
+            <strong>XIV</strong>
+            <span>X · MMXXVI</span>
+          </div>
+          <div className="analytic-class-copy">
+            <span>Decimoquinta clase · Cierre de Peter Hacker</span>
+            <h3>Las ocho críticas al positivismo lógico</h3>
+            <p>Unidad de las ciencias; fenomenalismo y fisicalismo; significado y verdad; Popper,
+              ciencias sociales y transición al análisis del lenguaje ordinario. Próxima lectura: Glock.</p>
+          </div>
+          <div className="analytic-enter"><span>Abrir análisis</span><b>↗</b></div>
+        </Link>
+
+        <Link to="/semestre/5/filosofia-analitica/clase/21-octubre" className="analytic-class-card">
+          <div className="analytic-date"><strong>XXI</strong><span>X · MMXXVI</span></div>
+          <div className="analytic-class-copy"><span>Decimoséptima clase · Glock pp. 46–49</span><h3>Fundamentos matemáticos, Bolzano, Boole y Frege</h3><p>Crisis de la matemática, formalización, lógica de funciones, antipsicologismo y cuantificación universal. La lectura concluyó en la página 49.</p></div>
+          <div className="analytic-enter"><span>Abrir análisis</span><b>↗</b></div>
+        </Link>
+
+        <Link to="/semestre/5/filosofia-analitica/clase/19-octubre" className="analytic-class-card">
+          <div className="analytic-date">
+            <strong>XIX</strong>
+            <span>X · MMXXVI</span>
+          </div>
+          <div className="analytic-class-copy">
+            <span>Decimosexta clase · Hans-Johann Glock</span>
+            <h3>Prehistoria del análisis y revolución copernicana</h3>
+            <p>
+              Dos sentidos del análisis; Descartes, Leibniz y empirismo; juicios analíticos
+              y sintéticos, sintético a priori, Kant, idealismo, naturalismo y neokantismo.
+            </p>
+          </div>
+          <div className="analytic-enter"><span>Abrir análisis</span><b>↗</b></div>
+        </Link>
+
+        <Link to="/semestre/5/filosofia-analitica/clase/26-octubre" className="analytic-class-card">
+          <div className="analytic-date"><strong>XXVI</strong><span>X · MMXXVI</span></div>
+          <div className="analytic-class-copy">
+            <span>Decimoctava clase · Glock pp. 50–53</span>
+            <h3>Frege, Russell y la rebelión contra el idealismo</h3>
+            <p>
+              Función y cuantificación; sentido, referencia y tercer reino; paradoja de Russell,
+              teoría de tipos, idealismo británico, relaciones y crítica de Moore a la verdad como coherencia.
+            </p>
+          </div>
+          <div className="analytic-enter"><span>Abrir análisis</span><b>↗</b></div>
+        </Link>
+        <Link to="/semestre/5/filosofia-analitica/clase/28-octubre" className="analytic-class-card">
+          <div className="analytic-date"><strong>XXVIII</strong><span>X · MMXXVI</span></div>
+          <div className="analytic-class-copy">
+            <span>Decimonovena clase · Glock · teoría de las descripciones</span>
+            <h3>Moore, Russell y la estructura lógica oculta</h3>
+            <p>Monismo y análisis, lógica fregeana, rey de Francia, descripción definida, bivalencia, objeciones docentes y límites del decir.</p>
+          </div>
+          <div className="analytic-enter"><span>Abrir análisis</span><b>↗</b></div>
+        </Link>
+
+
 </section>
 
       <section className="analytic-course-map">
@@ -501,6 +569,14 @@ export default function AnalyticPhilosophy() {
                 <p>{reading.author}</p>
                 <h3>{reading.title}</h3>
                 <small>{reading.note}</small>
+                {reading.route && (
+                  <Link to={reading.route} style={{
+                    display: 'inline-block', marginTop: '12px',
+                    padding: '9px 11px', border: '1px solid currentColor',
+                    color: 'inherit', textDecoration: 'none',
+                    font: '700 11px Arial, sans-serif', letterSpacing: '.08em',
+                  }}>EXPLORAR SISTEMA 2D ↗</Link>
+                )}
               </div>
             </article>
           ))}
